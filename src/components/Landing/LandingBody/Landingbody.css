@@ -1,0 +1,258 @@
+.food {
+  background-color: white;
+  height: 41px;
+  width: 142px;
+}
+.QuickestText {
+  font-size: 5.6vw;
+
+  font-weight: bolder;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+.FoodLanding {
+  color: #ff6838;
+  font-size: 5.6vw;
+  font-weight: 900;
+  inline-size: 8vw;
+}
+/* .textDivision {
+  inline-size: 36vw;
+  overflow-wrap: break-word;
+} */
+.text2 {
+  color: #ff6838;
+  font-size: 5.6vw;
+  /*font-size - vw */
+  font-weight: 900;
+}
+.DeliveryLanding {
+  font-size: 5.5vw;
+  font-weight: 900;
+  color: #ff6838;
+}
+.inTownTextLanding {
+  font-size: 5.6vw;
+  font-weight: 900;
+  color: black;
+  font-family: "Playfair Display";
+}
+.text2 span {
+  color: black;
+}
+.FoodDeliveryButtonLanding{
+  width: 12vw;
+  height: 3vw;
+  margin-bottom: -11%;
+  border-radius: 10px 10px 10px 10px;
+  font-size: large;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  color: #ff6838!important;
+  background-color: white!important;
+  box-shadow: 1px 1px 1px 1px rgb(173 172 172);
+}
+.our_text {
+  font-weight: 400;
+  font-size: 1.2vw;
+  color: #302f3c;
+}
+.BurgerImageLanding{
+  width: 2vw;
+  height: 2vw;
+}
+
+.order_button {
+  width: 16vw;
+  height: 61%;
+  background-color: #ff6838;
+  color: white;
+  border: none;
+  border-radius: 21px;
+  font-weight: 600;
+  border: 1px solid orangered !important;
+}
+.ellipse {
+  height: 77%;
+  margin-left: -10%!important;
+}
+.SearchIconLanding {
+  font-size: 1.7vw;
+}
+.mobile {
+  width: 70%;
+  height: 124%;
+  top: -25%;
+  position: absolute;
+  right: -10%;
+}
+.title_card {
+  font-size: 1.7vw;
+  font-weight: 900!important;
+  text-align: center;
+  /* font-family: "Playfair Display"; */
+
+}
+.appstore_image {
+  width: 95%;
+}
+.appstore_rating  {
+  background-color: #ff6838 !important;
+  text-align: center;
+}
+
+.playstore_image {
+  width: 48%;
+}
+.RatingsCountLanding{
+  text-align: center;
+}
+.playstore_rating {
+  background-color: #ff6838 !important;
+  size: 15%;
+}
+.fillstart {
+  color: yellow;
+  font-size: 1.5vw;
+  padding-bottom: 5px;
+}
+.playstore_rating span,
+.appstore_rating span {
+  color: black;
+  font-weight: 800;
+  justify-content: center;
+  font-size: 1vw;
+}
+.ReviewCountlanding{
+  font-size: 1vw;
+  color: #000000 ;
+  opacity: 60%;
+}
+.download_button {
+  width: 91%;
+  border-radius: 25px;
+  background-color: white !important;
+  color: black !important;
+  font-weight: 700;
+  height: 3.7vw;
+  font-size: 1.3vw;
+  border: 1px solid black!important;
+  margin-left: 7px;
+}
+.download_button:hover {
+  border: none !important;
+}
+.card_playstore,
+.card_appstore {
+  background-color: #ff6838;
+  border-radius: 50px 50px;
+  width:86%;
+  height: 100%;
+
+}
+
+
+.landingCard {
+  border-radius: 9%;
+  border: 1px solid black;
+  height: 93%;
+}
+.landingCard_Title {
+  text-align: justify;
+  font-weight: 900;
+  /* font-family: 'Playfair Display', serif; */
+
+  /* font-family: 'Rowdies'; */
+  font-size:3.2vw;
+}
+
+/* Media Query For Mobile Phone Width 400*/
+@media screen and (max-width: 500px) {
+  .landingCard {
+    width: 90vw;
+    height: 72vw;
+  }
+.order_button{
+  width: 47vw!important;
+}
+.SearchIconLanding{
+  font-size: 6.7vw;
+
+}
+  .FoodLanding {
+    color: #ff6838;
+    font-size: 10vw;
+    font-weight: 800;
+    /* inline-size: 8vw; */
+  }
+  .ellipse {
+    width: 68vw !important;
+    height: 72vw;
+  }
+
+  .QuickestText {
+    font-size: 7vw;
+    font-weight: 800;
+    font-size: 10vw;
+  }
+
+  .DeliveryLanding {
+    font-size: 7vw;
+    margin-left: 7px;
+    font-size: 10vw;
+    font-weight: 800;
+  }
+  .our_text {
+    font-weight: 400;
+    font-size: 4.4vw;
+    margin-right: -27% !important;
+    /* padding-right: 0px!important; */
+    text-align: center;
+  }
+  .inTownTextLanding {
+    text-align: center;
+    font-size: 10vw;
+  }
+  .order_button {
+    width: 54%;
+    height: 57%;
+    background-color: #ff6838;
+    color: white;
+    border: none;
+    font-size: 4vw;
+    border-radius: 20px;
+    font-weight: 600;
+    /* margin-left: 23%; */
+    text-align: center;
+  }
+  .mobile {
+    width: 85%;
+    height: 85%;
+    top: -101%;
+    position: absolute;
+    right: 2%;
+  }
+  .card_appstore {
+    background-color: #ff6838;
+    border-radius: 40px 40px;
+    width: 35vw;
+    height: 55vw;
+    margin-top: -64%!important;
+  }
+  .card_playstore {
+    background-color: #ff6838;
+    border-radius: 40px 40px;
+    width: 35vw;
+    height: 55vw;
+    margin-top: -64%!important;
+    margin-left: 130%;
+  }
+  .landingCard{
+  margin-top: 70%!important;
+  width: 98vw;
+  }
+  .landingCard_Title{
+    text-align: center;
+    font-size: 7vw;
+    margin-top: -2%!important;  }
+}

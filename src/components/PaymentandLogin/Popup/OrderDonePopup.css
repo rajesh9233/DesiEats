@@ -1,0 +1,10 @@
+.OrderDonePopUpHeader .btn-close{
+    position: absolute;
+    top:15%;
+    left:90%;
+
+}
+.OrderPlacedText{
+    font-size: 2vw;
+    font-weight: 700;
+}

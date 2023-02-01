@@ -1,0 +1,49 @@
+.TermsBeverage {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.beverageTermsModal {
+    --bs-modal-width: 500px!important;
+}
+
+.WarningBeverageText {
+    /* margin-left: -5%!important; */
+    font-size: 1vw;
+    font-weight: 400;
+    /* margin-right: -3%!important; */
+}
+
+.hrlinebeverage {
+    width: 95%;
+}
+
+.conditionTextBeverages {
+    font-size: 1vw;
+    font-weight: 400;
+}
+
+.consumealcoholtext {
+    margin-left: 20%;
+}
+
+.checkDontAskBeverage {
+    margin-left: -2%;
+}
+
+.form-check-input {
+    border: 1px solid black;
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.AcceptBeverages {
+    width: 105%;
+}
+
+.DeclineBeverages {
+    width: 105%;
+    color: #FF6838!important;
+    background-color: white!important;
+    border: 1px solid black!important;
+}

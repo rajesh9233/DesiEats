@@ -1,0 +1,86 @@
+.carouselImage {
+  width: 80vw !important;
+  height: 47vh !important;
+  border-radius: 22px;
+}
+.Address_Badge_header {
+  background-color: white !important;
+  border: 1px solid black;
+  border-radius: 25px;
+  width: 90%;
+}
+.DeliveryTo {
+  color: black;
+  font-size: small;
+}
+.address_view_data {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #000000;
+  border: none !important;
+  width: 100%;
+  font-size: small;
+  font-weight: 500;
+}
+.Home_Icon {
+  color: #FF6838;
+  font-size: large;
+  border: 2px solid  #FF6838;
+  border-radius: 25px;
+  font-size: x-large;
+}
+.home_button_text {
+  color:  #FF6838;
+  font-size: small;
+}
+
+@media screen and (max-width: 500px) {
+  .carouselImage {
+    width: 92vw !important;
+    height: 22vh !important;
+    border-radius: 22px;
+    margin-left: 11px;
+  }
+ 
+  .carousel .carousel-indicators button {
+   
+    position: relative;
+    bottom: -42px;  }
+
+}
+.carousel-control-next-icon, .carousel-control-prev-icon{
+  display:none
+}
+
+
+
+
+
+option:focus, option:active {
+  box-shadow: none !important;
+  outline: none;
+ }
+ option:focus{
+  background-color:#FFF;
+  outline:none;
+  border:none;
+  box-shadow:none;
+}
+
+.LocationIconHeader{
+  color: #FF6838 ;
+  font-size: 1.6vw;
+}
+.BannerImageHome{
+  width: 82vw;
+  height: 47vh;
+ 
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    margin-top: -1.2px!important;
+    border-top: 2px solid rgba(0, 0, 0, 0.03)
+}

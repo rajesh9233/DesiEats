@@ -1,0 +1,21 @@
+.btn{
+    background-color: #FF6838;
+    color: white;
+    /* border: none; */
+    cursor: pointer;
+    border: 1px solid white;
+  }
+  .btn:hover{
+    background-color: white!important; 
+ color: #FF6838ed!important;
+    cursor: pointer;
+    border:  1px solid black!important;
+    /* border: none!important; */
+    /* border-top: 1px solid #d0d0d0!important; */
+    /* padding-top:0!important; */
+
+  }
+  /* @media (min-width: 321px) and (max-width: 480px) {
+  body{
+  }
+  } */

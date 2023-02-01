@@ -1,0 +1,67 @@
+.Favourite_title {
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.Favourite_Badge {
+    width: 84%;
+}
+
+.Favourite_item_card {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 32%!important;
+    border-radius: 16px;
+    min-height: 100px;
+}
+
+.Favourite_item_card::-webkit-scrollbar-thumb {
+    background-color: orangered!important;
+    /* color of the scroll thumb */
+    border-radius: 20px!important;
+    /* roundness of the scroll thumb */
+    border: 3px solid orangered!important;
+    /* creates padding around scroll thumb */
+}
+
+.Favourite_item_card::-webkit-scrollbar {
+    width: 10px;
+    /* width of the entire scrollbar */
+}
+
+.Favourite_item_card::-webkit-scrollbar-track {
+    background: none;
+    /* color of the tracking area */
+}
+
+.favourite_card {
+    height: 77.5vh;
+    width: 57vw;
+    border-radius: 0px;
+}
+
+.favourite_image_prfile {
+    width: 19.5vw;
+    height: 13vw;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+}
+
+.FavCardProfile_page {
+    width: 26vw;
+    height: 25vw;
+}
+
+.Favourite_Badge_profile {
+    background-color: rgba(238, 228, 228, 0.963)!important;
+    color: black;
+    width: 93vh;
+    height: 5vh;
+    text-align: left!important;
+}
+
+.YourFavouriteRestaurent {
+    font-size: 1.3vw;
+}

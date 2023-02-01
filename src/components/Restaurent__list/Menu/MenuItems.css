@@ -1,0 +1,95 @@
+
+.menu_container{
+
+    position: absolute;
+    width: 44%;
+    top: 16%;
+}
+.user_button{
+    width: 85%;
+    height: 53%;
+    font-size: large;
+    border-radius: 25px;
+    font-weight: 500;
+
+  }
+.location_bar{
+    background-color: white!important;
+    color: black !important;
+}
+.menu_list{
+    cursor: pointer;
+}
+
+.activeclass{
+    color: white;
+    background-color: orangered;
+    border-radius: 17%;
+  border: 1px solid black !important;
+}
+.carousel .carousel-indicators button {
+    background-color: black;
+    border: none;
+    border-radius: 50%; 
+width: 10px;
+height: 10px;
+margin-bottom: 10px;
+display: "flex";
+align-items: center;
+  }
+  .carousel .carousel-indicators button.active {
+    background-color: orangered;
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .card_item_menu_home{
+    border-radius: 25px;
+    width: 8vw;
+    height: 8vw;
+}
+.food_items_menu_home{
+    position: absolute;
+    width: 4vw;
+    top: 16%;
+    left: 25%;
+}
+.item_title_homepage{
+    font-weight: 700;
+    font-size: 0.9vw;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 500px) {
+    .menu_images{
+width: 530%;
+height: 730%;
+    }
+   
+    .card_item_menu_home{
+        border-radius: 25px!important;
+        width: 20vw;
+        height: 19vw;
+    }
+    .activeclass {
+        width: 20vw!important;
+        height: 21vw!important;
+        border-radius: 11%!important;
+        border: 1px solid black !important;
+        color: white!important;
+        background-color: orangered!important;
+    }
+    .item_title_homepage{
+        font-weight: 700;
+        font-size: 2.2vw;
+        margin: 3px!important;
+        margin-left: 3px!important;
+    }
+    .food_items_menu_home {
+        position: absolute;
+        width: 8vw;
+        top: 23%;
+        left: 24%;
+  
+    }
+}

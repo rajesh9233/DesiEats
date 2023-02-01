@@ -1,0 +1,91 @@
+.cart_cardbutton{
+    border: 1px solid black;
+    border-radius: 25px;
+    color: orangered;
+    width: 2vw;
+    height: 2vw;
+}
+/* .item_count{
+  
+} */
+.cartpopup_card{
+    /* width: "90%"; */
+    /* : 80%; */
+    top: 0%;
+    /* overflow-y: scroll; */
+    position: sticky;
+    border-radius: 0px!important;
+}
+.menu_button1,.menu_button2,.menu_button3,.menu_button4{
+    border: 1px solid black;
+    color: black;
+    background-color: white;
+    border-radius: 25px;
+}
+.cart_cardbutton2{
+    border: 1px solid black;
+    border-radius: 25px;
+    color: orangered;
+    width: 55%;
+    height: 76%;
+}
+.promocode{
+    height: 75%;
+    width: 101%;
+
+}
+.Apply_button{
+    height: 75%;
+    width: 99%;
+}
+.checkout_button{
+width: 100%;
+}
+.cartbutton_headerpage{
+background-color: white;
+color: black;
+border-radius: 25px;
+border: 1px solid black;
+}
+.increament{
+width: 10%;
+height: 10%;
+}
+.dncreament{
+    width: 10%;
+    height: 10%;}
+   .horizontalLine{
+    border-top :2px solid black!important;
+}
+.amount_details{
+font-weight: 500;
+}
+.popup_item_image{
+    width: 3vw;
+    height: 7vh;
+}
+.count_button{
+    position: relative;
+    /* width: 4.3vw;
+    height: 3.3vh; */
+    top: -8%;
+    left: -7%;
+    text-align: center;
+    border-radius: 25px;
+    width: 4.5vw;
+    height: 2vw;
+    font-size: 1.2vw;
+    padding-top: 0px;
+    padding-bottom: 23px;
+}
+  
+
+.item_count_ButtonPopup{
+    position: relative;
+    width: 4vw;
+    height: 4vh;
+    top: -13%;
+    left: -9%;
+    text-align: center;
+    border-radius: 25px;
+}

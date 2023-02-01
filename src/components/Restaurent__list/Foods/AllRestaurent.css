@@ -1,0 +1,128 @@
+
+.open_hours_badge,.break_hours_badge{
+    height: 2vh;
+    border-radius: 1px;
+    width: 8vw;
+    font-size: 50%;
+    color: black;
+    background-color: white !important;
+    border: 0.3px solid #ff9e81;
+    opacity: 100%;
+}
+.delivery_time{
+    height: 2vh;
+    border-radius: 1px;
+    width: 6vw;
+    font-size: 50%;
+    color: black;
+    background-color: white !important;
+    border: 0.3px solid #ff9e81;;
+}
+    .card{
+        border-radius: 30px;
+        grid-column-gap: 50px;
+        column-gap: 2rem;
+
+    }
+.distance_button{
+    height: 35px;
+    border-radius: 1px;
+    width: 147px;
+    font-size: 11px;
+}
+
+.minimum_value{
+    position: absolute;
+    top: 40%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    background-color: orangered!important;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+   .delivery_by{
+    position: absolute;
+    top: 57%;
+    left: 62%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white!important;
+    color: black;
+    background-color: white;
+    font-size: 12px;
+    border: 1px solid orange;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.view_more{
+    background-color: white!important;
+    color: black!important;
+    border: 0px solid white!important;
+    width: 18vw;
+    font-size: 1.6vw;
+    text-align: center;
+}
+.view_more.btn:hover{
+    border:  0px!important;
+}
+.view_more.btn:focus,.view_more.btn:active {
+    outline: none !important;
+    box-shadow: none!important;
+ }
+
+.heart{
+    border: 2px solid black;
+    border-radius: 25px;
+    color: orangered;
+}
+.DeliveryHandledByAllRestuarant{
+    position: absolute;
+    top: 45%;
+    left: 68%;
+    width: 12vw;
+    background: white!important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: black;
+    background-color: white!important;
+    font-size: 65%;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+.minimum_valueAllrestaurant{
+    position: absolute;
+    top: 36%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    background-color: orangered!important;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px
+}
+.AllRestaurantHomepage{
+    cursor: pointer;
+}
+
+
+.Restaurent_SubTitle{
+  width: 140px;
+  overflow: hidden;
+  display: inline-block;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgb(44, 42, 42)!important;
+}

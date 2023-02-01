@@ -1,0 +1,77 @@
+.transactionBadge{
+    width: 48vw;
+    float: left;
+    background-color: rgba(238, 228, 228, 0.963)!important;
+}
+.transactionFont{
+    float: left;
+    color: black;
+    font-size: 140%;
+    font-weight: 700;
+}
+.filterIcon{
+    color: black;
+    font-size: 200%;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.Wallet_Card{
+    width:57vw;
+    border-radius: 0px;
+}
+.TotalBlance{
+    width: 22vw;
+    height: 23vh;
+}
+.AddMoneyText{
+    text-align: center;
+    float: center;
+}
+.WalletDeatilsProfile{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 168px!important;
+    border-radius: 16px;
+}
+.WalletDeatilsProfile::-webkit-scrollbar-thumb {
+
+    background-color: orangered!important;    /* color of the scroll thumb */
+    border-radius: 20px!important;       /* roundness of the scroll thumb */
+    border: 3px solid orangered!important;  /* creates padding around scroll thumb */
+  }
+  .WalletDeatilsProfile::-webkit-scrollbar {
+    width: 10px;  
+             /* width of the entire scrollbar */
+  }
+  
+  .WalletDeatilsProfile::-webkit-scrollbar-track {
+    background:none;  
+      /* color of the tracking area */
+  }
+.CashBackinProfile,.TotalMoneyAddedinProfile{
+    text-align: center;
+}
+.TotalMoneyAddedCard,.CashBackCard{
+    width: 22vw;
+}
+.TotalBalanceProfile,.TotalAmountProfile{
+    text-align: center;
+}
+.AmountCreditedProfilepage{
+    float: right;
+}
+.expiryDateProfile{
+    float: right;
+    margin-left: 20%;
+    margin-bottom: 0%;
+}
+.hrLineinWalletDetails{
+    margin-top: -16%!important;
+    margin-bottom: 0px!important;
+
+}
+.textdataWalletDetails{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

@@ -1,0 +1,61 @@
+.TermsCard{
+border-radius: 0px!important;
+width:57vw;
+}
+.Terms{
+  font-size: 140%;
+  font-weight: 700;
+}
+.helpText{
+  font-size: large;
+  font-weight: 600;
+
+}
+.helpIcon{
+  font-size: 120%;
+
+}
+/* .titleTerms,.helpText{
+  position: fixed;
+  top:20%;
+  z-index: 9999;
+} */
+.termsBody{
+  
+  text-align: justify;
+}
+.TermsCard {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+    height: 37.5vw;
+}
+.TermsCard::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+.termsBody{
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 23.6vw!important;
+  border-radius: 16px;
+
+}
+ .termsBody::-webkit-scrollbar-thumb {
+
+    background-color: orangered!important;    /* color of the scroll thumb */
+    border-radius: 20px!important;       /* roundness of the scroll thumb */
+    border: 3px solid orangered!important;  /* creates padding around scroll thumb */
+  } 
+  .termsBody::-webkit-scrollbar {
+    width: 10px;  
+             /* width of the entire scrollbar */
+  }
+  
+  .termsBody::-webkit-scrollbar-track {
+    background:none;  
+      /* color of the tracking area */
+  }
+  .PrivacyPolicyProfile{
+    font-size: 1.1vw;
+    font-weight: 500;
+  }

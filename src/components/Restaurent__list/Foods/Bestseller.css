@@ -1,0 +1,40 @@
+.arrow_left{
+color: black!important;
+background-color: white !important;
+border: 1px solid orangered!important;
+border-radius: 25px;
+width: 11%;
+}
+.arrow-leftIcon{
+font-size: 120%;
+font-weight: 700;
+
+}
+.arrow_right{
+color: white;
+background-color: orangered;
+width: 11%;
+border: 1px solid orangered;
+border-radius: 25px;
+}
+.arrow_rightIcon{
+ font-size: 120%;
+ font-weight: 700;
+
+}
+.trendingImage{
+    width: 33vw;
+    height: 25vh;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    margin-top: -1.2px!important;
+    border-top: 2px solid rgba(0, 0, 0, 0.03)
+
+}
+.BestSellerCardHomepage
+{
+    cursor: pointer;
+}

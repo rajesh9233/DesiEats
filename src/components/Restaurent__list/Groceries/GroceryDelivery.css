@@ -1,0 +1,33 @@
+.minimum_valueGrocery{
+    position: absolute;
+    top: 43%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    background-color: orangered!important;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px
+}
+.DeliveryHandledByGrocery{
+    position: absolute;
+    top: 53%;
+    left: 68%;
+    width: 12vw;
+    background: white!important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: black;
+    background-color: white!important;
+    font-size: 65%;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+.GroceryCardHomePage{
+    cursor: pointer;
+}

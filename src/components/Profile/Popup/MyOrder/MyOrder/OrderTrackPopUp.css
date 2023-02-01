@@ -1,0 +1,102 @@
+.Track_Order_Title{
+color: #FF6838;
+font-weight: 700;
+font-size: x-large;
+text-align: center;
+margin-bottom: -1%;
+}
+.track_order_title{
+font-weight: 700;
+text-align: center;
+font-size: 2.1vw;
+}
+.order_Placed,.order_Confirmed,.order_Preparing,.order_Assigning,
+.order_Assigned,.order_is_Ready,.order_Dispatched,.order_Delivered
+
+{
+    width: 38%;
+    height: 46%;
+}
+.Order_Placed_Text,.Order_Confirmed_Text,.Order_Preparing_Text,.Order_Assigning_Text,
+.Order_Assigned_Text,.Order_is_Ready_Text,.Order_Dispatched_Text,.Order_Delivered_Text
+{
+    font-weight: 700;
+    font-size: 1vw;
+}
+.OrderNumberTrackOrder{
+    font-weight: 700;
+    font-size: 1.4vw;
+}
+.ChatOptionTrack{
+    font-weight: 700;
+    font-size: 1vw;
+}
+.DatainTrackOrderDetails{
+font-weight: 700;
+font-size: 1.2vw;
+}
+.ModalHeaderTrackPopup.modal-header .btn-close {
+    position: relative;
+    top: 20%;
+    left: -4%;
+}
+.ItemTrackPopup{
+    text-align: center;
+    font-size: 1.1vw;
+}
+.QuantityTrackPopup{
+    font-size: 1.1vw;
+    text-align: center;
+
+}
+.PriceTrackPopup{
+    font-size: 1.1vw;
+    text-align: center;
+
+}
+.OrderItemTrackPopup{
+    width: 36vw;
+    background-color: rgb(236, 187, 169)!important;
+    color: #FF6838!important;
+    border-radius: 0;
+    margin-left: -3%;
+}
+.track_modalTrack{
+    --bs-modal-width: 920px!important;
+}
+.itemNameTrackorder{
+    font-weight: 700;
+    font-size: 1.1vw;
+}
+.TotalAmountTrackOrder{
+    font-size: 1.2vw;
+}
+.itemvaluestrackorder{
+    font-size: 1.3vw;
+    font-weight: 700;
+}
+.TotalDeliveryChargesTrack{
+    font-size: 1.1vw;
+
+
+}
+.itemvaluestrackorderMoney{
+    font-size: 1.2vw;
+    font-weight: 700;
+margin-top: -3%;
+}
+.OrderTotalValueTrack{
+    font-weight: 700;
+    font-size: 1.5vw;
+}
+.TotalMoneyValueTrack{
+    font-size: 1.5vw;
+color: #FF6838;
+font-weight: 700;
+
+}
+.OrderStatusCompleted{
+    height: 85%;
+    margin-left: 10px;
+    border-left: 3.1px solid #ff6838;
+}

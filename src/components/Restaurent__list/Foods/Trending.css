@@ -1,0 +1,224 @@
+.Restaurent_SubTitle {
+    font-size: 75%;
+}
+
+.Restaurent_Title {
+    font-weight: 600;
+    font-size: medium;
+}
+
+.Restaurent_Open_Close {
+    background-color: #79BC43!important;
+    border-radius: 5px;
+    height: 3vh;
+    width: 4vw;
+}
+
+.css-1nr2wod.Mui-checked {
+    color: #ff6838!important
+}
+
+.Restaurent_Rating_star {
+    color: yellow;
+    border: 1px black;
+    width: 1vw;
+}
+
+.favourite {
+    height: 2vh;
+    width: 2vw;
+    border-radius: 25px;
+    color: orangered;
+    position: absolute;
+    top: 19%;
+    left: -2%;
+}
+
+.Favourite_Badge_HomePage {
+    width: 2vw;
+    height: 3vh;
+    position: absolute;
+    top: 6%;
+    left: 81%;
+    border-radius: 25px;
+    background-color: white!important;
+}
+
+.DeliveryHandledBy {
+    position: absolute;
+    top: 49%;
+    left: 68%;
+    width: 12vw;
+    background: white!important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: black;
+    background-color: white!important;
+    font-size: 65%;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.minimum_value_trending {
+    position: absolute;
+    top: 34%;
+    left: 72%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    background-color: orangered!important;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px
+}
+
+.DeliveryHandledByTrending {
+    position: absolute;
+    top: 42%;
+    left: 68%;
+    width: 12vw;
+    background: white!important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: black;
+    background-color: white!important;
+    font-size: 65%;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.TrendingCardHomepage {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .TrendingCard_Homepage {
+        width: 101vw;
+        height: 77vw;
+    }
+    .minimum_value_trending {
+        position: absolute;
+        top: 79%;
+        width: 45vw;
+        height: 6vw;
+        /* font-size: 18vh; */
+        left: 30%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #555;
+        color: white;
+        background-color: orangered!important;
+        font-size: 3.3vw;
+        border: none;
+        cursor: pointer;
+        border-radius: 1px;
+    }
+    .DeliveryHandledByTrending {
+        position: absolute;
+        top: dashed;
+        top: 89%;
+        left: 34%;
+        width: 53vw;
+        font-size: 3.3vw;
+        background: white!important;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #555;
+        color: black;
+        background-color: white!important;
+        font-size: 3.3vw;
+        border: 1px solid #FF6838;
+        cursor: pointer;
+        border-radius: 1px;
+    }
+    .Restaurent_Open_Close {
+        background-color: #79BC43!important;
+        border-radius: 5px;
+        height: 3vh;
+        width: 17vw;
+        font-size: 3.3vw;
+    }
+    .Restaurent_Rating_star {
+        font-size: 5vw;
+    }
+    .rating_count_homepage {
+        font-size: 5vw;
+    }
+    .trendingImage {
+        width: 92vw;
+        height: 19vh;
+        border-bottom-right-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        border-top-left-radius: 18px !important;
+        border-top-right-radius: 18px !important;
+    }
+    .open_hours_badge {
+        width: 48vw!important;
+        /* height: 4vw!important; */
+        font-size: 2.3vw!important;
+        position: relative;
+        bottom: 599%;
+        text-align: left;
+        left: 46.2%;
+    }
+    .break_hours_badge {
+        width: 48.1vw!important;
+        /* height: 4vw!important; */
+        font-size: 2.3vw!important;
+        position: absolute;
+        bottom: 50%;
+        left: 48.1%;
+        text-align: left;
+    }
+    .delivery_time {
+        width: 24vw!important;
+        position: absolute;
+        top: 47%;
+        left: 74%;
+    }
+    .favourite {
+        height: 2vh;
+        width: 4vw;
+        border-radius: 25px;
+        color: orangered;
+        position: absolute;
+        top: 23%;
+        left: 16%;
+    }
+    .Favourite_Badge_HomePage {
+        width: 6vw;
+        height: 3vh;
+        position: absolute;
+        top: 10%;
+        left: 88%;
+        border-radius: 25px;
+        background-color: white!important;
+    }
+    .trendingCarousel .carousel-indicators {
+        position: absolute;
+        bottom: 9%;
+        left: -12%;
+        /* left: 0; */
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        padding: 0;
+        margin-right: 15%;
+        margin-bottom: 1rem;
+        margin-left: 15%;
+        list-style: none;
+    }
+    .viewMore_AllRestaurant {
+        font-size: 5vw;
+    }
+}
+
+.RatingCountItemsRestaurant {
+    font-weight: 700;
+}

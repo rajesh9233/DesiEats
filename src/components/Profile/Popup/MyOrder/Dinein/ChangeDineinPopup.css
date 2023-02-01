@@ -1,0 +1,71 @@
+.Modal_Title {
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.Dinein_Address_Change {
+    font-weight: 500;
+}
+
+.Date_of_Dinein {
+    font-weight: 500;
+    font-size: large;
+}
+
+.today_dinein {
+    width: 105%;
+}
+
+.tomorrow_dinein {
+    width: 109%;
+}
+
+.people_count {
+    font-weight: 600;
+}
+
+.dinein_count {
+    border: 2px solid black;
+    font-weight: 600;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.people_count_change_dinein {
+    font-weight: 600;
+    font-size: larger;
+}
+
+.add_people_count {
+    border-top: none!important;
+    border-left: none!important;
+    border-right: none !important;
+    border-radius: 0px!important;
+}
+
+.dinein_Time {
+    font-weight: 700;
+    font-size: larger;
+}
+
+.dinein_slot1_time,
+.dinein_slot2_time,
+.dinein_slot3_time {
+    width: 120%;
+}
+
+.book_dinein {
+    width: 120%;
+}
+
+.changeDineInProfile {
+    position: absolute;
+    top: 3%;
+    right: 1%;
+}
+
+.buttonCalander {
+    width: 100%;
+    height: 120%;
+}

@@ -1,0 +1,76 @@
+.cartitem_card {
+    border-radius: 1px!important;
+    max-height: 90%;
+    /* overflow-x: hidden; */
+}
+
+.delivery_Badge1,
+.delivery_Badge2 {
+    width: 100%;
+    height: 72%;
+    background-color: #FF6838!important;
+    font-size: medium;
+    text-align: center;
+    font-weight: 500;
+}
+
+.Ratings_verticalLine {
+    height: 50%;
+    border-left: 2px solid #000900;
+    font-weight: 600;
+}
+
+.shopTiming_verticalLine {
+    height: 68%;
+    border-left: 2px solid #000900;
+}
+
+.ItemBanner {
+    width: 67vw;
+    height: 20vw;
+}
+
+.Rating_out_of {
+    font-weight: 700;
+    font-size: medium;
+}
+
+.Rating_Count {
+    font-weight: 500;
+    font-size: 110%;
+}
+
+.open_Hours {
+    font-weight: 500;
+    font-size: medium;
+}
+
+.delivery_Time {
+    font-weight: 500;
+    font-size: medium;
+}
+
+.kilometer_verticalLine {
+    height: 100%;
+    border-left: 2px solid #000900;
+    font-size: medium;
+}
+
+.Delivery_Time {
+    font-weight: 500;
+    font-size: medium;
+}
+
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+    color: #FF6838!important;
+}
+
+.VegOnlyRestaurant {
+    font-weight: 700;
+    font-size: 1.1vw;
+}
+
+.css-jpln7h-MuiTabs-scroller {
+    overflow: auto!important;
+    max-width: 96%!important;
+}

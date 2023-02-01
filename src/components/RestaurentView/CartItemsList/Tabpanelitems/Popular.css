@@ -1,0 +1,68 @@
+.popular{
+    font-weight: 700;
+     font-size: 120%;
+}
+.itemTypeNonVeg{
+    border:2px solid red;
+    color: red  ;
+    font-size: 150%;
+}
+.itemTypeVeg{
+    border:2px solid green;
+    color: green  ;
+    font-size: 150%;
+
+}
+.itemDescription{
+     font-weight: "500";
+     font-size: small;
+}
+.price {
+    font-weight: 700;
+}
+.itemImage{
+    width: 6vw;
+    height: 5vw;
+    border-radius: 14px 19px 8px 12px;
+}
+.item_count_button{
+    border-radius: 25px;
+    background-color: orangered;
+    position: relative;
+    bottom: 53%;
+    left: 62%;
+    width: 6vw;
+    height: 2vw;
+    font-size: 1.2vw;
+    padding-top: 2px;
+    padding-bottom: 26px;
+}
+.increament{
+float: right;
+font-weight: 700;
+color: black;
+font-size: larger;
+text-align: justify;
+padding-bottom: 10%;
+margin-top: -3px;
+}
+.count{
+float: center;
+font-size: medium;
+}
+.decreament{
+    float: left;
+    font-weight: 700;
+    color: black;
+    font-size: larger;
+    margin-top: -3px;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+    color: orangered!important;
+}
+.css-1aquho2-MuiTabs-indicator{
+    background-color: orangered!important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+    color: #000!important;
+}

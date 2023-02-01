@@ -1,0 +1,18 @@
+.homeIcon,.SearchIcon,.NotificationIcon,.ShopIcon{
+    border:1px solid black;
+    border-radius:25px;
+    cursor: pointer;
+
+font-size: 160%;
+}
+.iconsRestaurentView{
+    cursor: pointer;
+
+}
+.cardTitle{
+    font-weight:700;
+    font-size:150%;
+}
+.userProfileFilled{
+    text-align: center;
+}

@@ -1,0 +1,104 @@
+
+.get_otp{
+  width: 102px;
+  height: 40px;
+  border-radius: 10px
+}
+.dropdown_button{
+  width: 100px;
+  height: 34px;
+  text-align: center;
+}
+.signup_button{
+  width: 174px;
+  height: 68px;
+  border-radius: 10px;
+}
+.login_btn{
+  width: 174px;
+  height: 68px;
+  border-radius: 10px;
+}
+.change_text{
+  text-align: center!important;
+}
+.btn232{
+ width: 100px;
+}
+.sign_up_button{
+  width: 309px;
+  height: 50px;
+  border-radius: 10px;
+
+}
+
+.login_button,.login_button1{
+     width: 100%;
+     font-size: 1.1vw;
+     height: 66%;
+     color: #FF6838!important;
+     background-color: white!important;
+     border: 1px solid black !important;
+
+}
+.get_otp_button_login{
+  width: 66%;
+  text-align: center;
+}
+.verify{
+width: 100%;
+background-color: white;
+  color: #FF6838;
+}
+.get_otp{
+
+width: 100%;
+border-radius: 8%;
+}
+
+.form-control{
+border: 1px solid black !important;
+}
+.signup_button_form{
+width: 100%;
+}
+
+
+.change_text span{
+  color: #FF6838;
+  /* font-size: larger; */
+}
+.textcolor_login{
+  color: #FF6838;
+  /* font-size: larger; */
+}
+#dropdown-basic{
+  width: 27%;
+  height: 87%;
+  border-radius: 19px;  }
+.dropdown-toggle::after {
+  float: right;
+  position: absolute;
+  top: 43%;
+  left: 23%;
+}
+
+.Account{
+font-size: x-large;
+font-weight: 600;
+}
+.Activebutton{
+color: white!important;
+background-color: #FF6838!important;
+border: 1px solid black!important;
+}
+.HearAbout_Write_text{
+border-top:none !important;
+border-left: none!important;
+border-right: none!important;
+border-radius: 0%;
+}
+.FormsPopupHeader.modal-header .btn-close{
+position: relative;
+top:17px;
+}

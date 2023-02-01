@@ -1,0 +1,68 @@
+.AddressCard_Profilepage{
+    width: 57vw;
+    height: 37.6vw;
+    border-radius: 0px!important;
+}
+.Manage_Address{
+    font-size: 120%;
+    font-weight: 700;
+}
+.Address_Badge{
+width: 100%;
+background-color: rgba(238, 228, 228, 0.963)!important;
+}
+.address_font{
+font-weight: 700;
+font-size: 140%;
+color: black;
+}
+.homeText{
+font-weight: 700;
+font-size: large;
+margin-bottom: 10%!important;
+}
+.homeText span{
+    font-weight: 400;
+
+}
+.Deleteicon{
+border: 1px solid black;
+font-size:xx-large;
+cursor: pointer;
+}
+.EditIcon{
+    border: 1px solid black;
+    font-size:xx-large;
+    color: #FF6838;
+    cursor: pointer;
+
+}
+.AddButton{
+width: 100%;
+}
+.hrLineAddressProfile{
+    width: 90%;
+}
+.AllAddressesProfilePage{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px!important;
+    border-radius: 16px;
+
+
+}
+.AllAddressesProfilePage::-webkit-scrollbar-thumb {
+
+    background-color: orangered!important;    /* color of the scroll thumb */
+    border-radius: 20px!important;       /* roundness of the scroll thumb */
+    border: 3px solid orangered!important;  /* creates padding around scroll thumb */
+  }
+  .AllAddressesProfilePage::-webkit-scrollbar {
+    width: 10px;  
+             /* width of the entire scrollbar */
+  }
+  
+  .AllAddressesProfilePage::-webkit-scrollbar-track {
+    background:none;  
+      /* color of the tracking area */
+  }

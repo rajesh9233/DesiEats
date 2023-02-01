@@ -1,0 +1,55 @@
+.input1,
+.input2,
+.input3,
+.input4 {
+  width: 133%;
+  height: 49%;
+  padding: 0px;
+  text-align: center;
+  font-weight: 500;
+}
+.write_here {
+  border-top: 0px !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0%;
+  border-bottom-style: 5px solid black !important ;
+  width: 100%;
+}
+.select_shared_source {
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='#FF6838'  height='24' viewBox='0 0 24 24' width='30' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 5px;
+  border: 1px solid #dfdfdf;
+  border: 1px solid black;
+  border-radius: 25px !important;
+}
+/* .HearAbout_Write_text{
+    border-top:none !important;
+    border-left: none!important;
+    border-right: none!important;
+    border-radius: 0%;
+  } */
+
+.HearAbout_Write_text:focus {
+    border-color: #ced4da; /* default B5 color or set your own color*/
+    border-top: none !important; /* if you want to remove borders at all*/
+    border-left: none !important; /* if you want to remove borders at all*/
+    border-right: none !important; /* if you want to remove borders at all*/
+border-radius: 0%;
+    outline: none !important;
+    box-shadow: none !important;
+  }  
+  .write_here_text{
+    color: #FF6838;
+  }
+  .get_otp{
+    font-size: small;
+    font-weight: 600;
+    
+  }
+  .TimerCountValue{
+    text-align: center;
+  }

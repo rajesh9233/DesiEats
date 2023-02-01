@@ -1,0 +1,23 @@
+.Myorders{
+border-radius: 0px;
+width:57vw;
+ border-radius: "none";
+}
+.Details,.Details1,.Details2,.Details3,.Details4,.Details5,.Details6{
+    font-weight: 600;
+    font-size: 1.1vw;
+}
+.verticalLine{
+    height: 70%;
+    border-left: 1px solid #7d757b;
+    white-space: pre;
+}
+.verticalLine3{
+    border-left: 1px solid #7d757b;
+}
+.detailContent{
+font-size: small;
+}
+.DeliveryAddress{
+    font-size: small;
+}

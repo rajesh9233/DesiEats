@@ -1,0 +1,54 @@
+
+.menu_container{
+
+    position: absolute;
+    width: 44%;
+    top: 16%;
+}
+.user_button{
+    width: 85%;
+    height: 53%;
+    font-size: large;
+    border-radius: 25px;
+    font-weight: 500;
+
+  }
+.location_bar{
+    background-color: white!important;
+    color: black !important;
+}
+.menu_list{
+    cursor: pointer;
+}
+
+.activeclass{
+    color: white;
+    background-color: orangered;
+    width: "94%";
+     height: "90%";
+}
+.menucard_restaurant{
+    width: "94%";
+     height: "90%";
+}
+.carousel .carousel-indicators button {
+    background-color: black;
+    border: none;
+    border-radius: 50%; 
+width: 10px;
+height: 10px;
+margin-bottom: 10px;
+display: "flex";
+align-items: center;
+  }
+  .carousel .carousel-indicators button.active {
+    background-color: orangered;
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  @media screen and (max-width: 500px) {
+    .menucard_restaurant{
+width: 5vw;
+}
+}

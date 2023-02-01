@@ -1,0 +1,36 @@
+.Login_Or_Sign {
+  width: 37%;
+  height: 88%;
+}
+.have_an_accoubt {
+  font-size: small;
+  text-align: center;
+}
+.login_signup {
+  font-size: small;
+}
+.contactless {
+  background-color: rgb(217,217,217,0.3) !important;  width: 70%;
+}
+.contactless_delivery {
+  font-weight: 500;
+  color: black;
+  font-size: 130%;
+  margin-bottom: 2%;
+  float: left;
+}
+
+  .order_content_details{
+    color:black;
+    font-weight:400;
+    float: left;
+
+    font-size:0.9vw;
+    margin-bottom: 5%!important;
+  }
+  .contactless_deliveryBadgePayment{
+    margin-left: 10%;
+  }
+  .checkmarkpaymentLogin{
+    width: 2vw;
+  }

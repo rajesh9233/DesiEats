@@ -1,0 +1,39 @@
+.DineinCart {
+  border-radius: 0px;
+  width:57vw;
+  border-radius: "none";
+}
+.itemTittle{
+    font-weight:700;
+    font-size:x-large;
+}
+.AddressValue{
+font-size: medium;
+}
+.verticalLine{
+  height: 70%;
+  border-left: 1px solid #000900
+}
+.CancelDineInItemProfile{
+  width: 8.5vw;
+  color: black!important;
+  background-color: rgb(142, 138, 138)!important;
+  font-weight: 600;
+  font-size: 1vw;
+  text-align: center;
+}
+.ChangeDineInItemProfile{
+  width: 8.5vw;
+  font-weight: 600;
+  font-size: 1vw;
+  text-align: center;
+
+
+}
+.DiningDateTime
+{
+  text-align: center;
+}
+.NoofMemberprofile{
+  text-align: center;
+}

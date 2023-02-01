@@ -1,0 +1,46 @@
+.AddressCard{
+border-radius: 0px;
+text-align: center;
+/* border: 1px solid black; */
+width:100%;
+}
+.AddAddress{
+    border-radius: 0px;
+    text-align: center;
+    /* border: 1px solid black; */
+    width:100%;
+    }
+.address{
+    font-weight: 600;
+}
+.delivere_here{
+    font-size:small;
+}
+.Add_new{
+    font-size:small;
+ width: 70%;
+ 
+}
+/* .DeliveryAddressPaymentPage{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #000000;
+    border: none !important;
+    width: 116%;
+    font-size: small;
+    font-weight: 500;
+} */
+.DeliveryAddressPaymentPage,.address{
+    text-align: center;
+}
+.AddNewAddressPayment{
+    text-align: center;
+}
+.HomeLocationPayment{
+    font-size: 1.3vw;
+    padding-top: 0%;
+}
+.AddAddressPayment{
+    font-size: 1.4vw;
+}

@@ -1,0 +1,31 @@
+.ProfileCard{
+    border-radius: 0px;
+    cursor: pointer;
+}
+.active{
+    color: orangered!important;
+}
+.order{
+    text-decoration: underline;     
+    text-decoration-color: orangered;  
+color: orangered;
+cursor: pointer;
+}
+
+.dropdown-toggle.btn {
+    height: 24px!important;
+    width: 27px;
+    text-align: center;
+    position: absolute;
+    border-radius: 25px;
+}
+.EmailIdProfilePage{
+    text-align: center;
+    cursor: default !important;
+}
+.UserNameProfilePage{
+text-align: center;
+}
+.nullOrder{
+    cursor: pointer;
+}

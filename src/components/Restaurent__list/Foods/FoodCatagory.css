@@ -1,0 +1,16 @@
+.activeRestaurent{
+    color: orangered;
+    font-size: x-large;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .FoodsCatagory{
+    font-size: x-large;
+    font-weight: 700;
+    cursor: pointer;
+
+  }
+  .RestaurantFoodsHome,.HomeMadeFoodsHomePage
+  {
+    cursor: pointer;
+  }

@@ -1,0 +1,18 @@
+.cancelDinein{
+font-weight: 600;
+font-size: larger;
+}
+.cancelButton{
+width: 100%;
+background-color: rgb(184, 179, 179)!important;
+color: black!important;
+}
+.okButton{
+    width: 100%;
+
+}
+.cancelDineInButton{
+    position: absolute;
+    top: 4%;
+    right: 2%;
+}
