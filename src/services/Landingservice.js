@@ -44,7 +44,7 @@ export const signupVerifyContinueApi = async (userData) => {
       "otpResponse",
       JSON.stringify(signUpApiVerfifyResponse.data.data)
     );
-  
+
     const locat = {
       pin_address: signUpApiVerfifyResponse.data.data.user_pin_address,
       street_address: signUpApiVerfifyResponse.data.data.user_street_address,
@@ -172,6 +172,18 @@ export const LocationPopupApi = async (userData) => {
     sessionStorage.setItem("userLocation", JSON.stringify(locat));
     //setItem storing the data in session
     return locationPopUpResponse;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const postalcodeAPI = async (lat, lng) => {
+  try {
+    let zipcodeResponse = await axios({
+      url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${"AIzaSyAZNYje65H5kEiuMuF_gFmDwloZLmuIv-I"}`,
+      method: "GET",
+    });
+    return zipcodeResponse;
   } catch (e) {
     console.log(e);
   }

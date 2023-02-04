@@ -85,7 +85,6 @@ input {
   width: 100%;
   margin-bottom: 0;
   display: table-cell;
-  padding: 6px 12px;
   border: 1px solid #ccc;
   margin: 0;
 }
@@ -119,5 +118,25 @@ input {
   position: relative;
   display: table;
   border-collapse: separate;
+  width: 60%;
+  margin: auto;
+}
+
+.error-style{
+  color: red;
+  font-size: "1vw";
+  text-align: center;
+}
+
+.get-otp-btn{
+  width: 63%;
+  margin: 4% auto;
+}
+.desc-login{
+  margin-top: 3%;
+}
+
+.otpformat div{
+  justify-content: center;
 }
 /* Mobile Number Input Field - ends*/

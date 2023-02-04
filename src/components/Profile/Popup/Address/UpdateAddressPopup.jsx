@@ -6,56 +6,34 @@ import "../../../Landing/Location/Location.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { updateDeliveryAddressApi } from "../../../../services/ProfilePageServices";
+import { AddressTypes } from "../../../../constants/Utils";
 
-function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPopUp ,AllAddressDataApi}) {
-  const CloseLocationPopUp = () => {
-    editPopUp(false); //callback function
-  };
+function UpdateAddressPopup({
+  editLocation,
+  editPopUp,
+  AllAddressDataApi,
+  addressData,
+}) {
   const [tabValue, setTabValue] = useState("");
-  const handleClicked = (value) => {
-    setTabValue(value);
-  };
+  const [tabId, setTabId] = useState("");
   const [markusError, setMarkUsError] = useState();
-  const showmarkUsError = () => {
-    if (tabValue === "") {
-      setMarkUsError("Please Select Address Type!");
-    } else {
-      setMarkUsError();
 
-      // console.log(tabValue);
-    }
-  };
   const initialValues = {
-    addressLine: "",
-    house: "",
-    UnitNumber: "",
-    postalCode: "",
-  };
-  const onSubmit = (values) => {
-    //Pass data through state in useNavigation
-    // if (values !== null) {
-    //   navigate("/home", {
-    //     state: {
-    //       addressLine: formik.values.addressLine,
-    //       postalCode: formik.values.postalCode,
-    //     },
-    //   });
-    // }
-    //}
+    pin_address: "",
+    street_address: "",
+    unit_number: "",
+    postal_code: "",
   };
 
   const validationSchema = yup.object({
-    addressLine: yup
+    pin_address: yup
       .string()
       .required("This Field Can't Be Empty!")
       .min(8, "Enter Minimum 8 Characters"),
 
-    house: yup.string().required("This Field Can't Be Empty!")
-    ,
-    UnitNumber: yup.string().required("This Field Can't Be Empty!")
-    ,
-
-    postalCode: yup
+    street_address: yup.string().required("This Field Can't Be Empty!"),
+    unit_number: yup.string().required("This Field Can't Be Empty!"),
+    postal_code: yup
       .string()
       .required("Enter Your Postal Code")
       .matches(/^[0-9\b]+$/, "Please Enter Digits Only")
@@ -64,19 +42,43 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
 
   const formik = useFormik({
     initialValues,
-    onSubmit,
     validationSchema,
   });
-  //   useEffect(() => {
-  //     formik.resetForm({
-  //       values: {
-  //         addressLine: "",
-  //         house: "",
-  //         UnitNumber: "",
-  //         postalCode: "",
-  //       },
-  //     });
-  //   }, [resetForm]);
+
+  useEffect(() => {
+    formik.setFieldValue("pin_address", addressData?.pin_address);
+    formik.setFieldValue("street_address", addressData?.street_address);
+    formik.setFieldValue("unit_number", addressData?.unit_number);
+    formik.setFieldValue("postal_code", addressData?.postal_code);
+
+    if (addressData?.label_type) {
+      AddressTypes.map((data) => {
+        if(data.id == addressData?.label_type){
+          setTabId(data.id);
+          setTabValue(data.value)
+        }
+      })
+    }
+  }, [addressData]);
+
+  const CloseLocationPopUp = () => {
+    formik.resetForm({
+      values: initialValues,
+    });
+    editPopUp(false); //callback function
+  };
+  const handleClicked = (item) => {
+    setTabValue(item.value);
+    setTabId(item.id);
+  };
+  const showmarkUsError = () => {
+    if (tabValue === "") {
+      setMarkUsError("Please Select Address Type!");
+    } else {
+      setMarkUsError();
+    }
+  };
+
   const handleBlur = () => {
     if (tabValue !== "") {
       setMarkUsError();
@@ -86,33 +88,30 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
   };
   const updateAddressDataApi = async (item) => {
     let postupdateAddressObj = {
-      address_id:addressIdState ,
+      address_id: addressData?.id,
       latitude: "22.94064340",
       longitude: "78.52852000",
-      pin_address: formik.values.addressLine,
-      unit_number: formik.values.UnitNumber,
-      street_address: formik.values.house,
-      postal_code: formik.values.postalCode,
-      address_type: tabValue,
+      pin_address: formik.values.pin_address,
+      unit_number: formik.values.unit_number,
+      street_address: formik.values.street_address,
+      postal_code: formik.values.postal_code,
+      address_type: tabId,
     };
 
     try {
       if (
         Object.keys(formik.errors).length === 0 &&
-        Object.keys(formik.touched).length !== 0 && 
-        tabValue!==""
-      ){
+        Object.keys(formik.touched).length !== 0 &&
+        tabValue !== ""
+      ) {
         let updateDeliveryAddressApiResponse = await updateDeliveryAddressApi(
           postupdateAddressObj
         );
-        if(updateDeliveryAddressApiResponse.status===200){
-          CloseLocationPopUp()
-          AllAddressDataApi()
+        if (updateDeliveryAddressApiResponse.status === 200) {
+          CloseLocationPopUp();
+          AllAddressDataApi();
         }
-  
       }
-
-      
     } catch (e) {}
   };
   return (
@@ -143,39 +142,42 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
                     name="firstname"
                     className="form-control mt-2 mb-2"
                     placeholder="Enter Your Address Line 1"
-                    id="addressLine"
-                    {...formik.getFieldProps("addressLine")}
+                    id="pin_address"
+                    value={formik.values.pin_address}
+                    onChange={formik.handleChange}
+                    {...formik.getFieldProps("pin_address")}
                   ></Form.Control>
-                  {formik.touched.addressLine && formik.errors.addressLine && (
+                  {formik.touched.pin_address && formik.errors.pin_address && (
                     <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.addressLine}
+                      {formik.errors.pin_address}
                     </div>
                   )}
 
                   <Form.Label>BLK/House/Apartment No</Form.Label>
                   <Form.Control
-                    name="house"
-                    id="house"
+                    name="street_address"
+                    id="street_address"
                     className="form-control mt-2 mb-2"
                     placeholder="Enter Your BLK/House/Apartment No"
-                    {...formik.getFieldProps("house")}
+                    {...formik.getFieldProps("street_address")}
                   ></Form.Control>
-                   {formik.touched.house && formik.errors.house && (
-                    <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.house}
-                    </div>
-                  )}
+                  {formik.touched.street_address &&
+                    formik.errors.street_address && (
+                      <div className="mb-2" style={{ color: "red" }}>
+                        {formik.errors.street_address}
+                      </div>
+                    )}
                   <Form.Label>Unit Number</Form.Label>
                   <Form.Control
-                    name="UnitNumber"
-                    id="UnitNumber"
+                    name="unit_number"
+                    id="unit_number"
                     className="form-control mt-2 mb-2"
                     placeholder="Enter Your Unit Number"
-                    {...formik.getFieldProps("UnitNumber")}
+                    {...formik.getFieldProps("unit_number")}
                   ></Form.Control>
-{formik.touched.UnitNumber && formik.errors.UnitNumber && (
+                  {formik.touched.unit_number && formik.errors.unit_number && (
                     <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.UnitNumber}
+                      {formik.errors.unit_number}
                     </div>
                   )}
                   <Form.Label> Postal Code</Form.Label>
@@ -183,13 +185,13 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
                     name="lastname"
                     className="form-control mt-2 mb-2"
                     placeholder="Enter Your Postal Code"
-                    id="postalCode"
+                    id="postal_code"
                     maxLength="6"
-                    {...formik.getFieldProps("postalCode")}
+                    {...formik.getFieldProps("postal_code")}
                   ></Form.Control>
-                  {formik.touched.postalCode && formik.errors.postalCode && (
+                  {formik.touched.postal_code && formik.errors.postal_code && (
                     <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.postalCode}
+                      {formik.errors.postal_code}
                     </div>
                   )}
                 </Col>
@@ -198,7 +200,7 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
             <p className="ms-2"> Mark as</p>
             <Container>
               <Row className="column-gap mb-3">
-                <Col lg="3" md="3" sm="3">
+                {/* <Col lg="3" md="3" sm="3">
                   <Button
                     id="home"
                     onBlur={handleBlur}
@@ -243,7 +245,25 @@ function UpdateAddressPopup({ allAddressData,addressIdState,editLocation, editPo
                     {" "}
                     other{" "}
                   </Button>
-                </Col>
+                </Col> */}
+                {AddressTypes.map((data) => {
+                  return (
+                    <Col lg="3" md="3" sm="3">
+                      <Button
+                        id="home"
+                        onBlur={handleBlur}
+                        className={
+                          tabValue === data.value
+                            ? "activeclassTabValue "
+                            : "office_button"
+                        }
+                        onClick={() => handleClicked(data)}
+                      >
+                        {data.value}
+                      </Button>
+                    </Col>
+                  );
+                })}
                 <p className="mt-2" style={{ color: "red" }}>
                   {markusError}
                 </p>

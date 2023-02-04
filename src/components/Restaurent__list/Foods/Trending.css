@@ -25,13 +25,8 @@
 }
 
 .favourite {
-    height: 2vh;
-    width: 2vw;
-    border-radius: 25px;
+    border-radius: 50%;
     color: orangered;
-    position: absolute;
-    top: 19%;
-    left: -2%;
 }
 
 .Favourite_Badge_HomePage {
@@ -95,6 +90,72 @@
 
 .TrendingCardHomepage {
     cursor: pointer;
+}
+
+.trending-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+.navigation-btn{
+    display: inherit;
+    width: 12%;
+}
+
+.navigation-left-arrow{
+    color: black !important;
+    background-color: white !important ;
+    border: 1px solid orangered !important;
+    border-radius: 25px;
+}
+
+.navigation-right-arrow{
+    color: white !important;
+    background-color:  orangered!important ;
+    border: 1px solid white !important;
+    border-radius: 25px;
+}
+
+.trending-card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 2% 0;
+}
+
+.trending-card{
+    max-width: 20%;
+    min-width: 20%;
+}
+
+.minimum-order-badge{
+    position: absolute;
+    bottom: 40%;
+    right: 0;
+    background-color: orangered !important;
+}
+
+.delivery-order-badge{
+    position: absolute;
+    bottom: 24%;
+    right: 0;
+    background-color: white !important;
+    color: black !important;
+}
+
+.wishlist-badge{
+    position: absolute;
+    right: 8%;
+    top: 8%;
+    background-color: white !important;
+    color: black !important;
+    border-radius: 50%;
+}
+
+.trending-img-cont{
+    position: relative;
+    min-height: 85%;
 }
 
 @media screen and (max-width: 500px) {

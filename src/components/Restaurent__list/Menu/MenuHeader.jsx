@@ -22,7 +22,11 @@ import "./MenuHeader.css";
 import { getBannerValue } from "../../../services/HomePageServices";
 import { ImLocation } from "react-icons/im";
 import { useLocation } from "react-router-dom";
-import { addressValuesSession, addressId,addressDatasValues } from "../../../constants/Utils";
+import {
+  addressValuesSession,
+  addressId,
+  addressDatasValues,
+} from "../../../constants/Utils";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getName } from "../../../constants/Utils";
@@ -54,65 +58,61 @@ function MenuHeader({}) {
   const bannerImage = HomePageDataItems?.ad_banners;
 
   // console.log(bannerImage);
-const[loginAddress,setLoginAddress]=useState()
-useEffect(()=>{
-  setLoginAddress(addressDatasValues())
+  const [loginAddress, setLoginAddress] = useState();
+  useEffect(() => {
+    setLoginAddress(addressDatasValues());
+  }, []);
 
-},[])
-
-let menuHeaderData=Object.keys( sessionLocationData())?.length
+  let menuHeaderData = Object.keys(sessionLocationData())?.length;
 
   return (
     <>
       <Row>
-        <DesiEatsImage />
-
-        <Col lg="4" md="6" sm="6" xs="1" className=" mt-3">
+        <Col lg="3" md="2" sm="2" xs="3">
+          <DesiEatsImage />
+        </Col>
+        <Col lg="4" md="2" sm="2" xs="3">
           <Badge className="Address_Badge_header mt-2">
             <Row>
               <Col lg="2" className="mt-2 ms-2">
                 <small className="DeliveryTo ">Delivering To</small>
               </Col>
-
-              {/* <Col lg="1"className="mt-1 "> */}
-
-              {/* {(HeaderAddressType==="Home")?
-      <AiFillHome className="Home_Icon ms-4 px-1 "/>:
-      
-      HeaderAddressType==="Office"?
-"office":"others"}
-      </Col>
-      <Col lg="1" className="home_button_text mt-2 ms-4">
-    <span >{HeaderAddressType?.HeaderAddressType}</span> */}
-              {/* </Col> */}
               <Col lg="1">
                 <ImLocation className="LocationIconHeader ms-3 mt-1" />
               </Col>
               <Col lg="8">
                 <FormSelect className="address_view_data">
-                  {/* <option>{addressdata.addressLine}{addressdata.house}{addressdata.UnitNumber}
-{addressdata.postalCode}</option>  */}
                   <option>
-                    {/* addressValuesSession -otp response */}
-                    {menuHeaderData!==0? sessionLocationData()?.pin_address +",":null}
-                   
-                    {menuHeaderData!==0?sessionLocationData().street_address +",":null}
-                    
-                    {menuHeaderData!==0?sessionLocationData().postal_code +",":null}
-                   
-                    {menuHeaderData!==0?sessionLocationData().unit_number +",":null}
+                    {menuHeaderData !== 0
+                      ? sessionLocationData()?.pin_address + ","
+                      : null}
+
+                    {menuHeaderData !== 0
+                      ? sessionLocationData().street_address + ","
+                      : null}
+
+                    {menuHeaderData !== 0
+                      ? sessionLocationData().postal_code + ","
+                      : null}
+
+                    {menuHeaderData !== 0
+                      ? sessionLocationData().unit_number + ","
+                      : null}
                   </option>
                 </FormSelect>
               </Col>
             </Row>
           </Badge>
         </Col>
-        <ToggleMenuButton />
+
+        <Col lg="2" md="6" sm="6" xs="1" className=" mt-3">
+          <ToggleMenuButton />
+        </Col>
+
         <Col lg="2" md="2" sm="2">
           <Button onClick={navigateToProfile} className="sign mt-3 ">
             <PersonFill></PersonFill>
             <small>{userName}</small>
-            {/* <small className="mx-1">{userName?firstName:null}</small> */}
           </Button>
         </Col>
       </Row>

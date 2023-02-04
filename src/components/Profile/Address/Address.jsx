@@ -15,24 +15,10 @@ import { AllDeliveryAddress } from "../../../constants/ProfilePageResponse";
 import "./Address.css";
 function Address() {
   const [showLocation, setShowLocation] = useState(false);
-  const showLocationPopup = () => {
-    setShowLocation(true);
-  };
-
-  const LocationPopUp = (value) => {
-    setShowLocation(value);
-  };
-  // console.log(AllDeliveryAddress)
   const [editLocation, setEditLocation] = useState(false);
-  const editLocationPopup = (item) => {
-    setAddressIdState(item.id)
-    setEditLocation(true);
-  };
-
-  const editPopUp = (value) => {
-    setEditLocation(value);
-  };
   const [allAddressData, setAllAddressData] = useState([]);
+  const [addressData, setAddressData] = useState();
+
   const AllAddressDataApi = async () => {
     let postAllAddressObj = {
       page: "0",
@@ -41,7 +27,6 @@ function Address() {
 
     try {
       let allAddressApidataResponse = await AllAddressApi(postAllAddressObj);
-
       setAllAddressData(allAddressApidataResponse.data.data);
     } catch (e) {}
   };
@@ -49,32 +34,38 @@ function Address() {
   useEffect(() => {
     AllAddressDataApi();
   }, []);
-  // console.log(allAddressData);
 
- 
-  //update_delivery_address Api
+  const handleAdd = () => {
+    setShowLocation(true);
+  };
 
-  
+  const LocationPopUp = (value) => {
+    setShowLocation(value);
+  };
+
+  const handleEdit = (item) => {
+    setAddressData(item);
+    setEditLocation(true);
+  };
+
+  const editPopUp = (value) => {
+    setEditLocation(value);
+  };
+
   //delete_delivery_address
-const [addressIdState,setAddressIdState]=useState()
-  const deleteAddressDataApi = async (item) => {
+  const handleDelete = async (item) => {
     let postdeleteAddressObj = {
-      address_id:item.id ,
+      address_id: item.id,
     };
-    // console.log(item)
     try {
       let deleteDeliveryAddressApiResponse = await deleteDeliveryAddressApi(
         postdeleteAddressObj
       );
-
-      // console.log(deleteDeliveryAddressApiResponse);
-     if(deleteDeliveryAddressApiResponse.status===200) {
-      AllAddressDataApi();
-
-     }
+      if (deleteDeliveryAddressApiResponse.status === 200) {
+        AllAddressDataApi();
+      }
     } catch (e) {}
   };
-// console.log(addressIdState)
   return (
     <>
       <Col lg="1" />
@@ -118,16 +109,20 @@ const [addressIdState,setAddressIdState]=useState()
                   </small>
                   <br />
                   <small className=" mt-4">
-                    {item.unit_number}, {item.street_address}, {item.pin_address}, {item.postal_code}
+                    {item.unit_number}, {item.street_address},{" "}
+                    {item.pin_address}, {item.postal_code}
                   </small>
                 </Col>
                 <Col lg="1">
-                  <AiFillDelete className="Deleteicon py-1" onClick={()=>deleteAddressDataApi(item)}></AiFillDelete>
+                  <AiFillDelete
+                    className="Deleteicon py-1"
+                    onClick={() => handleDelete(item)}
+                  ></AiFillDelete>
                 </Col>
                 <Col lg="1">
                   <FaPencilAlt
                     className="EditIcon py-1"
-                    onClick={()=>editLocationPopup(item)}
+                    onClick={() => handleEdit(item)}
                   ></FaPencilAlt>
                 </Col>
                 <Row>
@@ -143,16 +138,24 @@ const [addressIdState,setAddressIdState]=useState()
           <Row className="mb-5 mt-5">
             <Col lg="5" />
             <Col lg="2">
-              <Button className="AddButton" onClick={showLocationPopup}>
+              <Button className="AddButton" onClick={handleAdd}>
                 Add
               </Button>
             </Col>
           </Row>
         </Card>
       </Col>
-      <AddAddressPopup showLocation={showLocation} LocationPopUp={LocationPopUp} AllAddressDataApi={AllAddressDataApi}/>
-      <UpdateAddressPopup editLocation={editLocation} editPopUp={editPopUp} AllAddressDataApi={AllAddressDataApi} allAddressData={allAddressData} addressIdState={addressIdState} />
-
+      <AddAddressPopup
+        showLocation={showLocation}
+        LocationPopUp={LocationPopUp}
+        AllAddressDataApi={AllAddressDataApi}
+      />
+      <UpdateAddressPopup
+        editLocation={editLocation}
+        editPopUp={editPopUp}
+        AllAddressDataApi={AllAddressDataApi}
+        addressData={addressData}
+      />
     </>
   );
 }

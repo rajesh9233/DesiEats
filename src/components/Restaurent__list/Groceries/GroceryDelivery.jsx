@@ -1,20 +1,21 @@
 import { React, useState } from "react";
 import { Container, Col, Row, Button, Card, Badge } from "react-bootstrap";
 import "./GroceryDelivery.css";
-import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png"
+import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png";
 import { restaurentValues } from "../../RestaurentView/Redux/Actions/counterActions";
 import { TrendingRestaurent } from "../../../constants/HomePageResponse";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { restaurantIdDataMethod } from "../../../containers/app/features/CounterSlice";
-import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
-function GroceryDelivery({restaurentValues,restByCatagory}) {
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { whishListPostApi } from "../../../services/HomePageServices";
+function GroceryDelivery({ restaurentValues, restByCatagory, restaurantTab }) {
   const restaurentPerRow = 8;
-  let navigate=useNavigate()
+  let navigate = useNavigate();
   const dispatch = useDispatch();
 
   const ShowRestaurantData = (item) => {
-    navigate("/restaurant");
+    navigate("/restaurants");
     dispatch(restaurantIdDataMethod(item.restaurant_id));
     sessionStorage.setItem("restaurantData", item.restaurant_id);
   };
@@ -28,28 +29,40 @@ function GroceryDelivery({restaurentValues,restByCatagory}) {
   };
   const [clickedItems, setClickedItems] = useState([]);
 
-  const HandleClick =(item)=> {
+  const HandleClick = (item) => {
     //setRestaurent(item)
 
     // setIsSelected(item.id)
-  //   if (favItems.indexOf(item.id) === -1) {
-  //     favItems.push(item.id);
-  //   } else {
-  //     favItems.splice(index, 1);
-  //   }
-  //   console.log(favItems)
+    //   if (favItems.indexOf(item.id) === -1) {
+    //     favItems.push(item.id);
+    //   } else {
+    //     favItems.splice(index, 1);
+    //   }
+    //   console.log(favItems)
 
-setClickedItems((prevState)=>{
-  if(prevState.includes(item.restaurant_id)){
-    return prevState.filter(value=>value!==item.restaurant_id)
-  }
-  return [...prevState,item.restaurant_id]
-})
+    setClickedItems((prevState) => {
+      if (prevState.includes(item.restaurant_id)) {
+        return prevState.filter((value) => value !== item.restaurant_id);
+      }
+      return [...prevState, item.restaurant_id];
+    });
 
-// console.log(clickedItems)
-   };
-let groceryItemsData=restByCatagory
-// console.log(restByCatagory)
+    // console.log(clickedItems)
+  };
+  let groceryItemsData = restByCatagory;
+  // console.log(restByCatagory)
+
+  const handleFavourites = async (isfavourite, item) => {
+    let postData = {
+      restaurant_id: item.restaurant_id,
+      action_type: isfavourite,
+    };
+
+    let wishListResp = await whishListPostApi(postData);
+    if (wishListResp) {
+      restaurantTab();
+    }
+  };
 
   return (
     <>
@@ -60,40 +73,52 @@ let groceryItemsData=restByCatagory
           {groceryItemsData?.slice(0, 10)?.map((item, index) => (
             //Card Size splits 3 - 3
             <Col lg="3" mb="3" sm="3" className="d-flex grid-margin mb-5 gap-3">
-              <Card className="GroceryCardHomePage"
+              <Card
+                className="GroceryCardHomePage"
                 onClick={() => {
                   ShowRestaurantData(item);
                 }}
               >
                 <img
-                    src={item.banner_image}
-                    alt="no valid data"
-                    className="
+                  src={item.banner_image}
+                  alt="no valid data"
+                  className="
          trendingImage 
          img-responsive img-portfolio img-hover
          img-fluid "
-                  />
+                />
                 <Badge className="minimum_valueGrocery mb-3" variant="outlined">
                   Minimum Order Value :{item.min_order_value}
                 </Badge>
-                <Badge className="DeliveryHandledByGrocery mb-3" variant="outlined">
-          Delivery Handled By {item.delivery_handled_by==="1"?"restaurant":" Kerala Eats"}
-          </Badge>
-          <Badge
-          className="Favourite_Badge_HomePage"
-                      onClick={(e) => {
-                        e.stopPropagation()
+                <Badge
+                  className="DeliveryHandledByGrocery mb-3"
+                  variant="outlined"
+                >
+                  Delivery Handled By{" "}
+                  {item.delivery_handled_by === "1"
+                    ? "restaurant"
+                    : " Kerala Eats"}
+                </Badge>
+                <Badge
+                  className="Favourite_Badge_HomePage"
+                  onClick={(e) => {
+                    e.stopPropagation();
 
-                        HandleClick(item)}}
-                    >
-                      {clickedItems.indexOf(item.restaurant_id)===-1 ? (
-                        <AiOutlineHeart   className="favourite"
-                        />
-                      ) : (
-                        <AiFillHeart className="favourite"
-                        />
-                      )}
-                    </Badge>
+                    HandleClick(item);
+                  }}
+                >
+                  {item.isWishList === "1" ? (
+                    <AiFillHeart
+                      className="favourite"
+                      onClick={() => handleFavourites(2, item)}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      className="favourite"
+                      onClick={() => handleFavourites(1, item)}
+                    />
+                  )}
+                </Badge>
                 <Row>
                   {/* inside card splitting size 8-4 */}
                   <Col lg="8">
@@ -118,13 +143,15 @@ let groceryItemsData=restByCatagory
                     </Badge>
                     <br />
                     <small>
-                        <img src={RatingStart} alt="RatingCount" className="Restaurent_Rating_star mx-1 pb-1" />
-                      </small>
-                      <small className="RatingCountItemsRestaurant">
-                          {item.avg_rating}/5
-                        </small>
-
-
+                      <img
+                        src={RatingStart}
+                        alt="RatingCount"
+                        className="Restaurent_Rating_star mx-1 pb-1"
+                      />
+                    </small>
+                    <small className="RatingCountItemsRestaurant">
+                      {item.avg_rating}/5
+                    </small>
                   </Col>
                 </Row>
                 <Row>
@@ -167,4 +194,4 @@ let groceryItemsData=restByCatagory
 //   };
 // };
 // connect(null,mapDispatchToProps)
-export default  (GroceryDelivery);
+export default GroceryDelivery;

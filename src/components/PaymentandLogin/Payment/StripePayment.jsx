@@ -11,10 +11,10 @@ import { stripe_key } from "../../../constants/Utils";
 // This is a public sample test API key.
 // Don’t submit any personally identifiable information in requests made with this key.
 // Sign in to see your own test API key embedded in code samples.
-const stripePromise = loadStripe(stripe_key);
 
 export default function StripePayment({payAmount}) {
   const [clientSecret, setClientSecret] = useState("");
+  const [publishableKey, setPublishableKey] = useState("");   
 
   useEffect(() => {
       const processPaymentThreedsApiValues = async () => {
@@ -27,10 +27,13 @@ export default function StripePayment({payAmount}) {
             postPaymentDetailsApiObject
           );
           setClientSecret(walletDetailsApiResponse.data.data.clientSecret);
+          setPublishableKey(walletDetailsApiResponse.data.data.publishableKey);
         } catch (e) {}
       };
       processPaymentThreedsApiValues();
   }, []);
+
+  const stripePromise = loadStripe(publishableKey);
 
   const appearance = {
     theme: 'stripe',
@@ -41,7 +44,7 @@ export default function StripePayment({payAmount}) {
   };
 
   return (
-    <div className="App">
+    <div className="App mt-5 mb-3">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

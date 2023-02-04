@@ -1,219 +1,232 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Card, Badge } from "react-bootstrap";
-import menu from "../../../Asserts/pngwing 20 (1).png";
 import "./AllRestaurent.css";
 import { useNavigate } from "react-router-dom";
-import { searchRestaurantsApi } from "../../../services/HomePageServices";
-import { useSelector, useDispatch } from 'react-redux';
-import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
-import { GrStar} from "react-icons/gr";
+import {
+  searchRestaurantsApi,
+  whishListPostApi,
+} from "../../../services/HomePageServices";
+import { useSelector, useDispatch } from "react-redux";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { GrStar } from "react-icons/gr";
 import { restaurantIdDataMethod } from "../../../containers/app/features/CounterSlice";
 import Carousel from "react-bootstrap/Carousel";
-import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png"
-import { HomepageDetail } from "../../../constants/TrendingBestSellerResponse";
-import { restaurentValues } from "../../RestaurentView/Redux/Actions/counterActions";
-import { connect } from "react-redux";
+import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png";
 import { restaurentdatas } from "../../../containers/app/features/CounterSlice";
-import {TrendingRestaurent} from "../../../constants/HomePageResponse"
-import FoodsCatagory from "./FoodsCatagory";
-function All_restaurent({restaurentValues}) {
-   const username = useSelector((state)=>state.counter.restaurentlistvalues);
-  // console.log(username)
-  let allRestaurant=HomepageDetail.all_restaurant
-  // console.log(HomepageDetail.all_restaurant)
-      let navigate=useNavigate()
-      const ShowRestaurantData = (item) => {
-        navigate("/restaurant");
-        dispatch(restaurantIdDataMethod(item.restaurant_id));
-        sessionStorage.setItem("restaurantData", item.restaurant_id);
-      };
-      const restaurantDataId = useSelector((state) => state.counter);
-      // console.log(restaurantDataId);
-    
-  const restaurentPerRow = 8;
-  
-  const [next, setNext] = useState(restaurentPerRow);
 
-  const handleMoreButton = () => {
-    setNext(next + allRestaurant.length);
+function All_restaurent({}) {
+  let navigate = useNavigate();
+  const ShowRestaurantData = (item) => {
+    navigate("/restaurants");
+    dispatch(restaurantIdDataMethod(item.restaurant_id));
+    sessionStorage.setItem("restaurantData", item.restaurant_id);
+  };
+
+  const [postAllRestaurant, setPostAllRestaurant] = useState({
+    page: 0,
+    lat: "1.3005317",
+    lng: "103.8452356",
+  });
+  const [postAllResponse, setPostAllResponse] = useState([]);
+
+  const postAllRestaurantDataApi = async (item) => {
+    try {
+      let bestSellerDataResponse = await searchRestaurantsApi(
+        postAllRestaurant
+      );
+      setPostAllResponse([
+        ...postAllResponse,
+        ...bestSellerDataResponse.data.data.all_restaurant,
+      ]);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
+    postAllRestaurantDataApi();
+  }, [postAllRestaurant]);
+
+  const viewMoreButton = () => {
+    setPostAllRestaurant({
+      ...postAllRestaurant,
+      page: postAllRestaurant.page + 1,
+    });
+  };
+
+  const [clickedItems, setClickedItems] = useState([]);
+  const HandleClick = (item) => {
+    dispatch(restaurentdatas());
+
+    setClickedItems((prevState) => {
+      if (prevState.includes(item.restaurant_id)) {
+        return prevState.filter((value) => value !== item.restaurant_id);
+      }
+      return [...prevState, item.restaurant_id];
+    });
+
   };
 
 
-  const [postAllRestaurant, setPostAllRestaurant] = useState(
-    {
-      page: 0,
-      lat: "1.3005317",
-      lng: "103.8452356",
-     }
+  const dispatch = useDispatch();
+  const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth < 500) {
+      setIsMobileAllRestaurant(true);
+    }
+  }, []);
+  const homePageDatas = useSelector(
+    (state) => state.counter.homepagedatadeatils
   );
-  const [postAllResponse, setPostAllResponse] = useState()
-  useEffect(()=>{
-    const postAllRestaurantDataApi = async (item) => {
-      
-  
-      try {
-        let  bestSellerDataResponse = await searchRestaurantsApi(postAllRestaurant);
-  
-       
-        setPostAllResponse(bestSellerDataResponse.data.data.all_restaurant
-          );
-  
-      } catch (e) {}
+  const AllRestaurantDatas = homePageDatas?.all_restaurant;
+
+  const handleFavourites = async (isfavourite, item) => {
+    let postData = {
+      restaurant_id: item.restaurant_id,
+      action_type: isfavourite,
     };
-    postAllRestaurantDataApi();
-  
-  }, [postAllRestaurant]);
-
-  const viewMoreButton=()=>{
-    setPostAllRestaurant({...postAllRestaurant,page:postAllRestaurant.page+1})
-  
-  }
-
-  // console.log(postAllResponse)
-
-  
-  const [clickedItems, setClickedItems] = useState([]);
-  const HandleClick =(item)=> {
-    //setRestaurent(item)
-    dispatch(restaurentdatas())
-// console.log(item)
-    // setIsSelected(item.id)
-  //   if (favItems.indexOf(item.id) === -1) {
-  //     favItems.push(item.id);
-  //   } else {
-  //     favItems.splice(index, 1);
-  //   }
-  //   console.log(favItems)
-
-setClickedItems((prevState)=>{
-  if(prevState.includes(item.restaurant_id)){
-    return prevState.filter(value=>value!==item.restaurant_id)
-  }
-  return [...prevState,item.restaurant_id]
-})
-
-// console.log(clickedItems)
-   };
-  
-//          {allRestaurents?.slice(0, next)?.map((item, index) => (
-
-const dispatch = useDispatch();
-// dispatch(restaurent)
-const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
-       useEffect(() => {
-         if (window.innerWidth < 500) {
-          setIsMobileAllRestaurant(true);
-         }
-       }, []);
-       const homePageDatas = useSelector((state) => state.counter.homepagedatadeatils);
-       const AllRestaurantDatas=homePageDatas?.all_restaurant
+    let wishListResp = await whishListPostApi(postData);
+    if (wishListResp) {
+      postAllRestaurantDataApi();
+    }
+  };
 
   return (
     <>
-            {!isMobileAllRestaurant ? (
-
+      {!isMobileAllRestaurant ? (
         <Container>
-        <h2 className="mb-3">All Restaurants</h2>
+          <h2 className="mb-3">All Restaurants</h2>
 
- <Row className="mt-4">
- {postAllResponse?.slice(0,next)?.map((item, index) => (
-
-     //Card Size splits 3 - 3
-     <Col lg="3" mb="3" sm="3" className="d-flex grid-margin mb-5 gap-3">
-       <Card className="AllRestaurantHomepage" onClick={()=>{ShowRestaurantData(item)}}>
-       <img src={item.banner_image} alt="no valid data" className="
+          <Row className="mt-4">
+            {postAllResponse?.map((item, index) => (
+              //Card Size splits 3 - 3
+              <Col
+                lg="3"
+                mb="3"
+                sm="3"
+                className="d-flex grid-margin mb-5 gap-3"
+              >
+                <Card
+                  className="AllRestaurantHomepage"
+                  onClick={() => {
+                    ShowRestaurantData(item);
+                  }}
+                >
+                  <img
+                    src={item.banner_image}
+                    alt="no valid data"
+                    className="
          trendingImage 
          img-responsive img-portfolio img-hover
-         img-fluid " />
-<Badge className="minimum_valueAllrestaurant mb-3" variant="outlined">
-     Minimum Order Value :{item.min_order_value}
-   </Badge>
-   
-   <Badge className="DeliveryHandledByAllRestuarant mb-3" variant="outlined">
-          Delivery Handled By{item.delivery_handled_by==="1"?"restaurant":" Kerala Eats"}
-          </Badge>
-   <Badge
-   className="Favourite_Badge_HomePage"
-               onClick={(e) => {
-                 e.stopPropagation()
+         img-fluid "
+                  />
+                  <Badge
+                    className="minimum_valueAllrestaurant mb-3"
+                    variant="outlined"
+                  >
+                    Minimum Order Value :{item.min_order_value}
+                  </Badge>
 
-                 HandleClick(item)}}
-             >
-               {clickedItems.indexOf(item.restaurant_id)===-1 ? (
-                 <AiOutlineHeart   className="favourite"
-                 />
-               ) : (
-                 <AiFillHeart className="favourite"
-                 />
-               )}
-             </Badge>
-         <Row>
-           {/* inside card splitting size 8-4 */}
-           <Col lg="8">
-             <div className="ms-2 mt-2 ">
-               <small className=" Restaurent_Title">
-                 {" "}
-                 {item.rest_name}
-               </small>
-               <br />
-               <small className="mb-2 Restaurent_SubTitle text-muted">
-                 {item.res_description}
-               </small>
-             </div>
-            
+                  <Badge
+                    className="DeliveryHandledByAllRestuarant mb-3"
+                    variant="outlined"
+                  >
+                    Delivery Handled By
+                    {item.delivery_handled_by === "1"
+                      ? "restaurant"
+                      : " Kerala Eats"}
+                  </Badge>
+                  <Badge
+                    className="Favourite_Badge_HomePage"
+                    onClick={(e) => {
+                      e.stopPropagation();
 
-             <Badge className="delivery_by mt-2 mb-5" variant="outlined">
-               {item.Delivery_by}
-             </Badge>
-           </Col>
-           <Col lg="4">
-             <Badge className="Restaurent_Open_Close mt-2"><small>Open</small></Badge>
-           <br/>
-           <small>
-                        <img src={RatingStart} alt="RatingCount" className="Restaurent_Rating_star mx-1 pb-1" />
+                      HandleClick(item);
+                    }}
+                  >
+                    {item.isWishList === "1" ? (
+                      <AiFillHeart
+                        className="favourite"
+                        onClick={() => handleFavourites(2, item)}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        className="favourite"
+                        onClick={() => handleFavourites(1, item)}
+                      />
+                    )}
+                  </Badge>
+                  <Row>
+                    {/* inside card splitting size 8-4 */}
+                    <Col lg="8">
+                      <div className="ms-2 mt-2 ">
+                        <small className=" Restaurent_Title">
+                          {" "}
+                          {item.rest_name}
+                        </small>
+                        <br />
+                        <small className="mb-2 Restaurent_SubTitle text-muted">
+                          {item.res_description}
+                        </small>
+                      </div>
+
+                      <Badge
+                        className="delivery_by mt-2 mb-5"
+                        variant="outlined"
+                      >
+                        {item.Delivery_by}
+                      </Badge>
+                    </Col>
+                    <Col lg="4">
+                      <Badge className="Restaurent_Open_Close mt-2">
+                        <small>Open</small>
+                      </Badge>
+                      <br />
+                      <small>
+                        <img
+                          src={RatingStart}
+                          alt="RatingCount"
+                          className="Restaurent_Rating_star mx-1 pb-1"
+                        />
                       </small>
                       <small className="RatingCountItemsRestaurant">
-                          {item.avg_rating}/5
-                        </small>
-             
-         
-           </Col>
-         </Row>
-         <Row>
-           <Col lg="7">
-             <Badge className="open_hours_badge ms-2" variant="outlined">
-               Open Hours-{item.open_time}-{item.close_time}
-             </Badge>
-           </Col>
-           <Col lg="4">
-           <Badge className="delivery_time">
-               {item.del_prep_time} | {item.distance}{" "}
-             </Badge>
-           </Col>
-         </Row>
-         <Row>
-           <Col lg="7">
-             <div className="ms-2">
-               <Badge
-                 className="break_hours_badge mt-2 mb-3"
-                 variant="outlined"
-               >
-                 Break Hours-{item.break_start_time} -{" "}
-                 {item.break_end_time}
-               </Badge>
-             </div>
-           </Col>
-           <Col lg="3"/>
-         </Row>
-         
-       </Card>
-     </Col>
-   ))}
-</Row>
-
-</Container>
-)
-: (
+                        {item.avg_rating}/5
+                      </small>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col lg="7">
+                      <Badge
+                        className="open_hours_badge ms-2"
+                        variant="outlined"
+                      >
+                        Open Hours-{item.open_time}-{item.close_time}
+                      </Badge>
+                    </Col>
+                    <Col lg="4">
+                      <Badge className="delivery_time">
+                        {item.del_prep_time} | {item.distance}{" "}
+                      </Badge>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col lg="7">
+                      <div className="ms-2">
+                        <Badge
+                          className="break_hours_badge mt-2 mb-3"
+                          variant="outlined"
+                        >
+                          Break Hours-{item.break_start_time} -{" "}
+                          {item.break_end_time}
+                        </Badge>
+                      </div>
+                    </Col>
+                    <Col lg="3" />
+                  </Row>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      ) : (
         <Container>
           <Row className="mt-4">
             <Carousel className="trendingCarousel">
@@ -230,7 +243,6 @@ const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
                     <Card
                       onClick={() => {
                         ShowRestaurantData(item);
-                        
                       }}
                     >
                       <img
@@ -326,10 +338,16 @@ const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
                           HandleClick(item);
                         }}
                       >
-                        {clickedItems.indexOf(item.restaurant_id) === -1 ? (
-                          <AiOutlineHeart className="favourite" />
+                        {item.isWishList === "1" ? (
+                          <AiFillHeart
+                            className="favourite"
+                            onClick={() => handleFavourites(2, item)}
+                          />
                         ) : (
-                          <AiFillHeart className="favourite" />
+                          <AiOutlineHeart
+                            className="favourite"
+                            onClick={() => handleFavourites(1, item)}
+                          />
                         )}
                       </Badge>
                     </Card>
@@ -340,9 +358,6 @@ const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
           </Row>
         </Container>
       )}
-        
-    
-
 
       {/* --------------------------------------- VIEW MORE BUTTON ---------------------------------------------- */}
       <section>
@@ -360,8 +375,7 @@ const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
             </Col>
           </Row>
         </Container>
-      </section>   
-
+      </section>
     </>
   );
 }

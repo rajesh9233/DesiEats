@@ -1,13 +1,12 @@
-import React from 'react'
-import Search from '../../components/Searchpage/Search'
-import SearchHeader from '../../components/Searchpage/SearchHeader'
+import React from "react";
+import Search from "../../components/Searchpage/Search";
+import SearchHeader from "../../components/Searchpage/SearchHeader";
 function SearchContainer() {
   return (
     <>
-    <SearchHeader/>
-     <Search/>
-     
-     </>
-  )
+      <SearchHeader />
+      <Search />
+    </>
+  );
 }
-export default SearchContainer
+export default SearchContainer;

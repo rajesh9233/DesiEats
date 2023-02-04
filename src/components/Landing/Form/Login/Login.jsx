@@ -1,13 +1,9 @@
 import { React, useEffect, useState } from "react";
 import { Col, Row, Button, Form } from "react-bootstrap";
-import axios from "axios";
-import { IoRefreshOutline } from "react-icons/io5";
+import OTPInput from "otp-input-react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { connect } from "react-redux";
 import swal from "sweetalert";
-import { handleEnter } from "../../../../constants/Utils";
-import { getLoginResponse } from "../../../RestaurentView/Redux/Actions/counterActions";
 import "./Login.css";
 import { getUserType } from "../../../../constants/Utils";
 import {
@@ -19,14 +15,22 @@ function Login({
   handleCloseFormsPopUp,
   handleOpenLocation,
 }) {
-  // const showLocationPopup = () => setShowLocation(true);
-  // const LocationPopUp = (value) => {
-  //   setShowLocation(value);
-  // };
   const [timerCount, setTimeCount] = useState(null);
+  const [OTP, setOTP] = useState("");
+  const [showError, setShowError] = useState("");
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+
+  useEffect(() => {
+    if (isSubmitClicked && OTP && OTP.length < 4) {
+      setShowError("Please Enter a valid Otp!");
+    } else {
+      setShowError();
+    }
+  }, [OTP]);
+
   let timerOn = true;
 
-  function timer(remaining){
+  function timer(remaining) {
     var m = Math.floor(remaining / 60);
     var s = remaining % 60;
 
@@ -37,57 +41,30 @@ function Login({
 
     setTimeCount(TimerCounter);
 
-    if(remaining >= 0 && timerOn){
+    if (remaining >= 0 && timerOn) {
       setTimeout(function () {
         timer(remaining);
       }, 1000);
       return;
     }
 
-    if(!timerOn){
+    if (!timerOn) {
       // Do validate stuff here
       return;
     }
   }
 
-  //OTP Validation
-  const [varstate, setVarstate] = useState({
-    inputone: "",
-    inputtwo: "",
-    inputthree: "",
-    inputfour: "",
-  });
-
-  const [showError, setShowError] = useState("");
-
-  const handleChanger = (e) => {
-    const value = e.target.value;
-    setVarstate({
-      ...varstate,
-      [e.target.name]: value,
-    });
-  };
-
-  let otp2 = varstate.inputone + "" + varstate.inputtwo + "" + varstate.inputthree + "" + varstate.inputfour + "";
-
-  const handleBlur = () => {
-    if(otp2.length < 4){
-      setShowError("Please Enter 4 digits!");
-    }else{
-      setShowError();
-    }
-  };
-
   const handleSubmiter = () => {
-    if (otp2.length < 4) {
+    setIsSubmitClicked(true);
+    if (OTP.length < 4) {
       setShowError("Please Enter a valid Otp!");
     } else {
       setShowError();
+      getLoginVerifyApi();
     }
   };
 
   //SignUp Module GetOtp API :-
-  //-----------------------------
   const getLoginOtpApi = async () => {
     let postLoginOtpObj = {
       contact: formik.values.getotpNumber,
@@ -107,69 +84,67 @@ function Login({
             text: loginApiResponse.data.message,
             type: "success",
             timer: 1500,
-            button:false,
+            button: false,
 
             confirmButtonText: "OK",
             className: "popuptetx",
             confirmButtonColor: "#8CD4F5",
             icon: "success",
           });
-        }else{
-
+        } else {
           swal({
             title: "Error!",
-            text:loginApiResponse.data.message ,
+            text: loginApiResponse.data.message,
             type: "Error",
             timer: 1500,
-            button:false,
+            button: false,
 
             icon: "error",
             className: "popuptetx",
           });
-
         }
-
-        // console.log(loginApiResponse);
       }
     } catch (e) {}
   };
 
   //Login Module Login Complete API :-
-  //-----------------------------
   const getLoginVerifyApi = async () => {
     let postLoginVerifyObject = {
-      contact       : formik.values.getotpNumber,
-      code          : otp2,
-      device_id     : "",
-      device_type   : "",
-      device_token  : "",
-      app_id        : "2",
-      guest_userId  : "",
+      contact: formik.values.getotpNumber,
+      code: OTP,
+      device_id: "",
+      device_type: "",
+      device_token: "",
+      app_id: "2",
+      guest_userId: "",
     };
 
     try {
-      if(Object.keys(formik.errors).length === 0 && Object.keys(formik.touched).length !== 0){
+      if (
+        Object.keys(formik.errors).length === 0 &&
+        Object.keys(formik.touched).length !== 0
+      ) {
         let loginApiVerifyResponse = await LoginVerifyContinueApi(
           postLoginVerifyObject
         );
 
-        if(loginApiVerifyResponse.data.status === 200){
+        if (loginApiVerifyResponse.data.status === 200) {
           handleCloseFormsPopUp();
           getLoginResponse(loginApiVerifyResponse);
-          if(getUserType() === 2){
+          if (getUserType() === 2) {
             setTimeout(() => {
               handleOpenLocation(true);
             }, 1500);
           }
-        }else{
+        } else {
           swal({
-            title     : "Error!",
-            text      : loginApiVerifyResponse.data.message ,
-            type      : "Error",
-            timer     : 1500,
-            button    : false,
-            icon      : "error",
-            className : "popuptetx",
+            title: "Error!",
+            text: loginApiVerifyResponse.data.message,
+            type: "Error",
+            timer: 1500,
+            button: false,
+            icon: "error",
+            className: "popuptetx",
           });
         }
       }
@@ -188,189 +163,82 @@ function Login({
         .required("Enter Your Mobile Number!"),
     }),
   });
-  //----------------------------------------------------
 
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
         <Row>
-          <Col lg="1" md="1" sm="4"></Col>
-          <Col lg="10" md="9" sm="9">
-            <div className="change_text ">
-              <span>Sign up</span>  <b>or log in to your account</b>
+          <div className="change_text">
+            <span>Sign up</span> <b>or log in to your account</b>
+          </div>
+          <p className="change_text desc-login">
+            <small>
+              Mobile Numbers of users by sending OTP verification code during
+              registaration,login and contact form submissions.
+            </small>
+          </p>
+          <div>
+            <div class="input-group prefix">
+              <span class="input-group-addon">+65</span>
+              <input
+                type="text"
+                className="getNumber form-control"
+                id="getotpNumber"
+                maxLength="8"
+                name="getotpNumber"
+                placeholder="Phone Number"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                {...formik.getFieldProps("getotpNumber")}
+              />
             </div>
-          </Col>
-          <Col lg="1" />
-          <Row>
-            <Col lg="1" />
-            <Col lg="10" className="otptext mt-3">
-              <small>
-                {" "}
-                Mobile Numbers of users by sending OTP verification code <br />
-                during registaration,login and contact form submissions.
-              </small>
-            </Col>
-            <Col lg="1" />
-          </Row>
-          <Row className="mt-3 ms-3 mb-3">
-            <Col lg="2" />
-            <Col lg="7">
-              <div class="input-group prefix">                           
-                <span class="input-group-addon">+65</span>
-                <input type="text"
-                  className="getNumber form-control"
-                  id="getotpNumber"
-                  maxLength="8"
-                  name="getotpNumber"
-                  placeholder="Phone Number"
-                  aria-label="Username" 
-                  aria-describedby="basic-addon1"
-                  {...formik.getFieldProps("getotpNumber")}
-                />
-              </div>
-              {formik.touched.getotpNumber && formik.errors.getotpNumber && (
-                <div className="" style={{ color: "red", fontSize: "1vw" }}>
-                  {formik.errors.getotpNumber}
-                </div>
-              )}
-            </Col>
-          </Row>
-
-          <Row className="mt-1 ms-3">
-            <Col lg="2" />
-
-            <Col lg="7">
-              <Button
-                className="getNumber get_otp_button_login"
-                type="submit"
-                onClick={getLoginOtpApi}
-                disabled={
-                  timerCount !== "00:00" && timerCount !== null ? true : false
-                }
-              >
-                {timerCount === null ? "Get OTP" : "Resend OTP"}
-              </Button>
-            </Col>
-            <Col lg="2" />
-          </Row>
-          <Row>
-            <Col lg="3" />
-            <Col lg="7" className="mt-3">
-              <p className="otp ">Please enter the OTP received</p>
-            </Col>
-          </Row>
-
-          <Row className="mx-2">
-            <Col lg="3" />
-            <Col lg="5">
-              <Row>
-                <Col lg="3">
-                  <Form.Control
-                    type="text"
-                    name="inputone"
-                    id="inputone"
-                    className="inputone mt-2 mb-3"
-                    placeholder=""
-                    maxlength="1"
-                    value={varstate.inputone}
-                    onChange={handleChanger}
-                    onBlur={handleBlur}
-                    onKeyDown={handleEnter}
-                  ></Form.Control>
-                </Col>
-                <Col lg="3">
-                  <Form.Control
-                    className="inputtwo mt-2 mb-3"
-                    type="text"
-                    maxlength="1"
-                    onBlur={handleBlur}
-                    value={varstate.inputtwo}
-                    id="inputtwo"
-                    name="inputtwo"
-                    onChange={handleChanger}
-                    placeholder=""
-                    onKeyDown={handleEnter}
-                  />
-                </Col>
-                <Col lg="3">
-                  <Form.Control
-                    className="inputthree mt-2 mb-3"
-                    type="text"
-                    value={varstate.inputthree}
-                    id="inputthree"
-                    name="inputthree"
-                    onChange={handleChanger}
-                    maxlength="1"
-                    onBlur={handleBlur}
-                    placeholder=""
-                    onKeyDown={handleEnter}
-                  />
-                </Col>
-                <Col lg="3">
-                  <Form.Control
-                    className="inputthree mt-2 mb-3"
-                    type="text"
-                    value={varstate.inputfour}
-                    id="inputfour"
-                    name="inputfour"
-                    onChange={handleChanger}
-                    maxlength="1"
-                    onBlur={handleBlur}
-                    placeholder=""
-                    onKeyDown={handleEnter}
-                  />
-                </Col>
-
-                {/* <Col lg="2" className="borderTextBox">
-
-                </Col>
-                <Col lg="2" className="borderTextBox">
-                  
-                  </Col>
-                  <Col lg="2" className="borderTextBox">
-                  
-                  </Col>
-                  <Col lg="2" className="borderTextBox">
-                  
-                  </Col>  */}
-                {timerCount !== null && timerCount !== "00:00" ? (
-                  <div>
-                    <small></small>Time left {timerCount}{" "}
-                    <span id="timer"></span>
-                  </div>
-                ) : null}
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg="2" />
-            {/* <Col lg="7">
-              <p style={{ color: "red" }} className="ms-4">
-                {" "}
-                {shoeError}
-              </p>
-              {timerCount==="00:00"?(<h6 className="ms-5" onClick={getLoginOtpApi}>
-                Resend OTP <IoRefreshOutline />
-              </h6>):<div>Time left ={timerCount} <span id="timer"></span></div>
+            {formik.touched.getotpNumber && formik.errors.getotpNumber && (
+              <div className="error-style">{formik.errors.getotpNumber}</div>
+            )}
+          </div>
+          <div className="get-otp-btn">
+            <Button
+              className="getNumber get_otp_button_login"
+              type="submit"
+              onClick={getLoginOtpApi}
+              disabled={
+                timerCount !== "00:00" && timerCount !== null ? true : false
               }
-              
-            </Col> */}
-          </Row>
-          <Row>
-            <Col lg="3"></Col>
-            <Col lg="5">
+            >
+              {timerCount === null ? "Get OTP" : "Resend OTP"}
+            </Button>
+            <div className="change_text desc-login">
+              <p className="otp">Please enter the OTP received</p>
+            </div>
+            <div className="change_text desc-login otpformat">
+              <OTPInput
+                value={OTP}
+                onChange={setOTP}
+                OTPLength={4}
+                otpType="number"
+                disabled={false}
+              />
+              <div className="" style={{ color: "red", fontSize: "1vw" }}>
+                {showError}
+              </div>
+              {timerCount !== null && timerCount !== "00:00" ? (
+                <div>
+                  <small></small>Time left {timerCount} <span id="timer"></span>
+                </div>
+              ) : null}
+            </div>
+            <div className="get-otp-btn">
               <Button
                 className="verify mt-3 ms-4 mb-5"
                 type="submit"
                 onClick={() => {
                   handleSubmiter();
-                  getLoginVerifyApi();
                 }}
               >
                 Verify
               </Button>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Row>
       </Form>
     </>

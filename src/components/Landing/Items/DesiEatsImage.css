@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+.logo-container{
+    margin-left: 5%;
+}
+
 @media screen and (max-width: 500px) {
     .DesiEatsImageLanding {
         width: 23vw!important;

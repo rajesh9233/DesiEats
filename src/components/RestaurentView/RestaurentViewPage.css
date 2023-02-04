@@ -1,0 +1,24 @@
+.restaurent-header-container{
+  width: 70%;
+}
+
+.res-cart-container{
+  width: 30%;
+}
+
+.res-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.res-image-container{
+  width: 80%;
+  padding: 1%;
+  display: flex;
+}
+
+.res-adress-container{
+  width: 100%;
+  display: flex;
+  padding: 1%;
+}

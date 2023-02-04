@@ -5,6 +5,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+import { getUrl } from "../../../services/URl/Url";
 // import { useNavigate } from 'react-router-dom';
 // import swal from "sweetalert";
 
@@ -87,9 +88,12 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
         // return_url: window.location.origin,
-        return_url: "http://localhost:3000/process_payment",
+        // return_url: "http://localhost:3000/process_payment",
+        return_url:getUrl()+ "/process_payment",
       },
+
     });
+    console.log(error)
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to

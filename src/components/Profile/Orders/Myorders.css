@@ -21,3 +21,11 @@ font-size: small;
 .DeliveryAddress{
     font-size: small;
 }
+.itemDeliveryAddressProfile{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #000000;
+    border: none !important;
+    width: 110%!important;
+}

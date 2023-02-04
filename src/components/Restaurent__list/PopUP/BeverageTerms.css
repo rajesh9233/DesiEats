@@ -1,6 +1,26 @@
 .TermsBeverage {
     font-size: 1.1rem;
     font-weight: 700;
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
+
+.terms{
+    margin: 4% auto;
+    width: 80%;
+}
+
+.checkBoxBeverages{
+    width: 35%;
+    margin-left: 10%;
+}
+
+.beverages-btn{
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+    margin: 4% auto;
 }
 
 .beverageTermsModal {
@@ -8,10 +28,16 @@
 }
 
 .WarningBeverageText {
-    /* margin-left: -5%!important; */
     font-size: 1vw;
     font-weight: 400;
-    /* margin-right: -3%!important; */
+    width: 90%;
+    margin: auto;
+    text-align: justify;
+}
+
+.hr-tag{
+    margin: 4% auto;
+    width: 80%;
 }
 
 .hrlinebeverage {
@@ -38,11 +64,12 @@
 }
 
 .AcceptBeverages {
-    width: 105%;
+    width: 120px;
+
 }
 
 .DeclineBeverages {
-    width: 105%;
+    width: 120px;
     color: #FF6838!important;
     background-color: white!important;
     border: 1px solid black!important;

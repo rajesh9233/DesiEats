@@ -29,11 +29,12 @@ function ProfileHeader() {
   return (
     <>
       <Row>
-        <DesiEatsImage />
-        <Col lg="4" md="6" sm="6" className="mt-1"></Col>
-
-        <ToggleMenuButton />
-
+        <Col lg="6" md="2" sm="2" xs="3">
+          <DesiEatsImage />
+        </Col>
+        <Col lg="4" md="2" sm="2" xs="3">
+          <ToggleMenuButton />
+        </Col>
         <Col lg="2" md="2" sm="2" xs="3">
           <Button
             className="sign mt-3"

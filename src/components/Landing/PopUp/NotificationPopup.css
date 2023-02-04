@@ -1,13 +1,57 @@
-.Title{
-font-weight: 700;
+.tittle{
+  font-weight: 700;
+  padding: 3%;
 }
-.Itemcard{
-border-radius: 10px;
+.item-card{
+  border-radius: 10px;
+  min-height: 125px;
 }
-.payment{
-font-weight: 600;
-font-size: larger;
+.notification-tittle{
+  font-weight: 600;
+  font-size: larger;
 }
 .itemImage{
-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.modal-container .modal-content {
+  min-height: 500px;
+}
+
+.notification-header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1% 6%;
+}
+
+.notification-body{
+  padding: 1% 6%;
+}
+
+.notification-card{
+  padding: 3%;
+}
+
+.item-container{
+  display: flex;
+}
+
+.content-container{
+  width: 70%;
+  margin: auto;
+  display: inline;
+}
+
+.img-container{
+  width: 30%;
+}
+
+.desc{
+  margin-top: 5px;
+}
+
+.no-data{
+  text-align: center;
 }

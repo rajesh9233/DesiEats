@@ -8,6 +8,7 @@ import { GrStar } from "react-icons/gr";
 import { WhishListGetApi } from "../../../services/ProfilePageServices";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { WhishListApi } from "../../../services/ProfilePageServices";
+import { whishListPostApi } from "../../../services/HomePageServices";
 function Favourite() {
   const [clickedItems, setClickedItems] = useState([]);
   const ShowRestaurantData = (item) => {
@@ -40,23 +41,35 @@ function Favourite() {
 
   const [wishListData, setWishListData] = useState([]);
 
-  useEffect(() => {
-    const wishListGetValuesApi = async () => {
-      let postWishListObject = {
-        page: "0",
-        limit: "10",
-        date_timestamp: "1648101600",
-      };
-
-      try {
-        let WishListResponse = await WhishListGetApi(postWishListObject);
-        setWishListData(WishListResponse.data.data);
-        // console.log(wishListData);
-        // window.location.reload(true); //refresh the page
-      } catch (e) {}
+  const wishListGetValuesApi = async () => {
+    let postWishListObject = {
+      page: "0",
+      limit: "10",
+      date_timestamp: "1648101600",
     };
+
+    try {
+      let WishListResponse = await WhishListGetApi(postWishListObject);
+      setWishListData(WishListResponse.data.data);
+      // console.log(wishListData);
+      // window.location.reload(true); //refresh the page
+    } catch (e) {}
+  };
+
+  useEffect(() => {
     wishListGetValuesApi();
   }, []);
+
+  const handleFavourites = async (isfavourite, item) => {
+    let postData = {
+      restaurant_id: item.restaurant_id,
+      action_type: isfavourite,
+    };
+    let wishListResp = await whishListPostApi(postData);
+    if (wishListResp) {
+      wishListGetValuesApi();
+    }
+  };
 
   return (
     <>
@@ -82,7 +95,7 @@ function Favourite() {
             <Row>
               <Col lg="11" className="ms-4">
                 <Row className="Favourite_item_card mt-4 ">
-                  {wishListData.length>0
+                  {wishListData.length > 0
                     ? wishListData.map((item, index) => (
                         <Col
                           lg="5"
@@ -128,12 +141,10 @@ function Favourite() {
                                 HandleClick(item);
                               }}
                             >
-                              {clickedItems.indexOf(item.restaurant_id) ===
-                              -1 ? (
-                                <AiOutlineHeart className="favourite" />
-                              ) : (
-                                <AiFillHeart className="favourite" />
-                              )}
+                              <AiFillHeart
+                                className="favourite"
+                                onClick={() => handleFavourites(2, item)}
+                              />
                             </Badge>
                             <Row>
                               {/* inside card splitting size 8-4 */}
@@ -205,7 +216,6 @@ function Favourite() {
                           </Card>
                         </Col>
                       ))
-
                     : "No Data Found"}
                 </Row>
               </Col>

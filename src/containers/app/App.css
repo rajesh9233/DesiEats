@@ -7,15 +7,25 @@
   }
   .btn:hover{
     background-color: white!important; 
- color: #FF6838ed!important;
+    color: #FF6838ed!important;
     cursor: pointer;
     border:  1px solid black!important;
-    /* border: none!important; */
-    /* border-top: 1px solid #d0d0d0!important; */
-    /* padding-top:0!important; */
 
   }
-  /* @media (min-width: 321px) and (max-width: 480px) {
-  body{
+  
+  body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
   }
-  } */
+  
+  body::-webkit-scrollbar-track {
+    background: white;        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: orangered;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+  body {
+    scrollbar-width: thin; 
+  }

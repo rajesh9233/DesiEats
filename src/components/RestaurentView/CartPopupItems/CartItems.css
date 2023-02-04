@@ -9,12 +9,10 @@
   
 } */
 .cartpopup_card{
-    /* width: "90%"; */
-    /* : 80%; */
     top: 0%;
-    /* overflow-y: scroll; */
     position: sticky;
     border-radius: 0px!important;
+    box-shadow: 0 0 0 2px rgb(173 172 172);
 }
 .menu_button1,.menu_button2,.menu_button3,.menu_button4{
     border: 1px solid black;
@@ -30,14 +28,32 @@
     height: 76%;
 }
 .promocode{
-    height: 75%;
-    width: 101%;
+    width: 95%;
+    height: 40px;
 
 }
 .Apply_button{
-    height: 75%;
-    width: 99%;
+    width: 85%;
+    height: 40px;
 }
+
+.cont-promo{
+    width: 100%;
+    margin: auto;
+}
+
+.total-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    width: 94%;
+    margin: auto;
+}
+
+.clear-all{
+    cursor: pointer;
+}
+
 .checkout_button{
 width: 100%;
 }
@@ -88,4 +104,47 @@ font-weight: 500;
     left: -9%;
     text-align: center;
     border-radius: 25px;
+}
+
+.order-text{
+    font-size: 1vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-text p {
+    margin: 0;
+}
+
+.image-cart-div{
+    width:70%
+}
+.button-cart-div{
+    width:30%;
+    position: relative;
+}
+
+.add-btn{
+    position: absolute;
+    right: 25%;
+    bottom: 10%;
+}
+
+.cart-scroll-container{
+    max-height: 250px;
+    font-size: 1vw !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.promo-container{
+    display: flex;
+}
+
+.input-promo{
+    width:60%
+}
+
+.btn-promo{
+    width:40%
 }

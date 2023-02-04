@@ -1,0 +1,18 @@
+.profileContainer .modal-content {
+  padding: 20px 20px 40px 20px !important;
+}
+
+.updateButton{
+  width: 34%;
+  margin: 20% auto;
+}
+
+.icons{
+  width: 100%;
+  text-align: center;
+}
+
+.profileImg{
+  border-radius: 50%;
+  height: 125px;
+}

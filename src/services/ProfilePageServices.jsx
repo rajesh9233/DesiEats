@@ -211,12 +211,12 @@ export const trackOrdersApi = async (userData) => {
   try {
     let trackOrdersResponse = await axios({
       // Endpoint to send files
-      url: getUrl()+"/customerOrders/track_orders_status?order_id=24926",
+      url: getUrl()+`/customerOrders/track_orders_status?order_id=${userData.order_id}`,
       headers: { "Content-Type": "application/x-www-form-urlencoded",
       "Authorization":getToken() 
     },
 
-      method: "POST",
+      method: "GET",
       // Attaching the form data
       data: userData,
     });
@@ -297,7 +297,7 @@ export const viewMoreOrderDetailApi = async (userData) => {
   try {
     let viewMoreOrderDetailResponse = await axios({
       // Endpoint to send files
-      url: getUrl()+"/customerOrders/view_more_order_detail?order_id=24926",
+      url: getUrl()+`/customerOrders/view_more_order_detail?order_id=${userData.order_id}`,
       headers: { 
         "Content-Type"  : "application/x-www-form-urlencoded",
         "Authorization" : getToken() 

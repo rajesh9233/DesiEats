@@ -10,9 +10,9 @@
 }
 
 .confirm_btn {
-    width: 89%;
-    height: 70%;
-    border-radius: 6%;
+    border-radius: 60px;
+    width: 75%;
+    margin: auto;
 }
 
 .Account {
@@ -69,4 +69,8 @@
 
 .css-yk16xz-control {
     border: 1px solid black !important;
+}
+
+.input-style{
+    margin-top: 2%;
 }

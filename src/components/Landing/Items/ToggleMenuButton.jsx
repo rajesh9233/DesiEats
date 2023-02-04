@@ -1,4 +1,4 @@
-import { React, useState,useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { Col, Button, Collapse } from "react-bootstrap";
 import { Grid3x3GapFill } from "react-bootstrap-icons";
 import { AiOutlineHome } from "react-icons/ai";
@@ -12,87 +12,78 @@ import SearchPopup from "../PopUp/SearchPopUp";
 import CartPopup from "../PopUp/CartPopup";
 import ThreeDotsImage from "../../../Asserts/landingpage/Circled Menu.png";
 function ToggleMenuButton() {
-    //Get values for hear about us API
-    const [notifications, setNotifications] = useState([]);
-
-
-      const getNotificationsApi = async () => {
-        let getNotificationsObject = {
-          selected_tab: "1",
-          page: "1",
-          limit:"10"
-        };
-        try {
-            let notificationsApiApiResponse = await listAllNotificationApi(getNotificationsObject);
-            // setUserList()
-            setNotifications(notificationsApiApiResponse.data.data)
-         
-        } catch (e) {}
-      };
-    
-  //toggle button open close
+  //Get values for hear about us API
+  const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
-  let navigate = useNavigate();
-  const navigateToHome=()=>{
-    navigate("/")
+  const [showSearch, setShowSearch] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
-  }
+  let navigate = useNavigate();
+
+  const getNotificationsApi = async () => {
+    let getNotificationsObject = {
+      selected_tab: "1",
+      page: "1",
+      limit: "10",
+    };
+    try {
+      let notificationsApiApiResponse = await listAllNotificationApi(
+        getNotificationsObject
+      );
+      setNotifications(notificationsApiApiResponse.data.data);
+    } catch (e) {}
+  };
+
+  //toggle button open close
+  const navigateToHome = () => {
+    navigate("/");
+  };
+
   //SearchPopup close
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const closePopUp = (value) => {
-    setShow(value);
+  const handleSearch = () => setShowSearch(true);
+  const closeSearchPopUp = (value) => {
+    setShowSearch(value);
   };
 
   //NotificationPopup close
-
-  const [show1, setShow1] = useState(false);
-  const handleShow1 = () => 
-  {
-    setShow1(true);
-    getNotificationsApi()
-
-
-  }
-  const closePopUp1 = (value) => {
-    setShow1(value);
+  const handleNotification = () => {
+    setShowNotification(true);
+    getNotificationsApi();
+  };
+  const closeNotificationPopUp = (value) => {
+    setShowNotification(value);
   };
 
   //CartPopup close
-  const [show2, setShow2] = useState(false);
-  const handleShow2 = () => setShow2(true);
-  const closePopUp2 = (value) => {
-    setShow2(value);
+  const handleCart = () => setShowCart(true);
+  const closeCartPopUp = (value) => {
+    setShowCart(value);
   };
 
   return (
     <>
-      <Col lg="3" md="1" sm="1" xs="2" className="mt-3">
-        <div>
+      <div className="toggle-container">
+        <div className="button-container">
           <Collapse in={open} dimension="width">
-            <Button className="menu1  ms-1" onClick={navigateToHome}>
-              <AiOutlineHome />
-            </Button>
-          </Collapse>
-          <Collapse in={open} dimension="width">
-            <Button className="menu2 ms-3 " onClick={handleShow}>
-              <FiSearch />
-            </Button>
-          </Collapse>
-          <Collapse in={open} dimension="width">
-            <Button className="menu3 ms-3  " onClick={handleShow1}>
-              <RiNotification3Line />
-            </Button>
-          </Collapse>
-          <Collapse in={open} dimension="width">
-            <Button className="menu4 ms-3 " onClick={handleShow2}>
-              <RiShoppingBag3Line />
-            </Button>
+            <div id="example-collapse-text" className="button-toggle">
+              <Button className="menuButton" onClick={navigateToHome}>
+                <AiOutlineHome />
+              </Button>
+              <Button className="menuButton" onClick={handleSearch}>
+                <FiSearch />
+              </Button>
+              <Button className="menuButton" onClick={handleNotification}>
+                <RiNotification3Line />
+              </Button>
+              <Button className="menuButton" onClick={handleCart}>
+                <RiShoppingBag3Line />
+              </Button>
+            </div>
           </Collapse>
         </div>
-
         <Button
-          className="menu "
+          className="menu"
           onClick={() => setOpen(!open)}
           aria-controls="example-collapse-text"
           aria-expanded={open}
@@ -103,11 +94,15 @@ function ToggleMenuButton() {
             className="ThreeDotsIcon"
           ></img>
         </Button>
-      </Col>
+      </div>
 
-      <SearchPopup show={show} closePopUp={closePopUp}/>
-      <NotificationPopup show={show1} closePopUp={closePopUp1}  notifications={notifications}/>
-      <CartPopup show={show2} closePopUp={closePopUp2} />
+      <SearchPopup show={showSearch} closePopUp={closeSearchPopUp} />
+      <NotificationPopup
+        show={showNotification}
+        closePopUp={closeNotificationPopUp}
+        notifications={notifications}
+      />
+      <CartPopup show={showCart} closePopUp={closeCartPopUp} />
     </>
   );
 }

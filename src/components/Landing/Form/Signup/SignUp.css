@@ -38,7 +38,7 @@
     border-top: none !important; /* if you want to remove borders at all*/
     border-left: none !important; /* if you want to remove borders at all*/
     border-right: none !important; /* if you want to remove borders at all*/
-border-radius: 0%;
+    border-radius: 0%;
     outline: none !important;
     box-shadow: none !important;
   }  
@@ -48,8 +48,33 @@ border-radius: 0%;
   .get_otp{
     font-size: small;
     font-weight: 600;
+    border-radius: 60px;
     
+  }
+
+  .text small{
+    margin-left: 2%;
   }
   .TimerCountValue{
     text-align: center;
+  }
+
+  .signup-container{
+    margin-left: 2%;
+  }
+
+  .signup-container div{
+    width: 75%;
+    margin: auto;
+    margin-top: 4%;
+  }
+
+  .signup-container select{
+    width: 75%;
+    margin: auto;
+    margin-top: 4%;
+  }
+
+  .hear-abt{
+    margin-left: 12%;
   }

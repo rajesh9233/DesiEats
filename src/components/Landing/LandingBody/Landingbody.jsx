@@ -23,53 +23,62 @@ import "./Landingbody.css";
 import App from "../Location/App";
 
 function Landingbody() {
-  
   let navigate = useNavigate();
 
   const [resetForm, setResetForm] = useState(false);
-  const [showLocation, setShowLocation] = useState(false);  //Location modal
+  const [showLocation, setShowLocation] = useState(false); //Location modal
   const [isMobileLandind, setIsMobileLanding] = useState(false);
-  
+
   const navigateToHome = () => {
     navigate("/home");
   };
 
-  if(sessionLocationData() === undefined && sessionLocationData().initialVal === undefined){
+  if (
+    sessionLocationData() === undefined &&
+    sessionLocationData().initialVal === undefined
+  ) {
     const locationObj = {
-      pin_address   : "",
+      pin_address: "",
       street_address: "",
-      postal_code   : "",
-      unit_number   : "",
-      latitude      : "",
-      longitude     : "",
-      initialVal    : 0,
+      postal_code: "",
+      unit_number: "",
+      latitude: "",
+      longitude: "",
+      initialVal: 0,
     };
     sessionStorage.setItem("userLocation", JSON.stringify(locationObj));
   }
 
   const showLocationPopup = () => {
-    if(landingFormsData() === null || landingFormsData() === undefined){
-        setShowLocation(true);
-    }else{
+    if (landingFormsData() === null || landingFormsData() === undefined) {
+      setShowLocation(true);
+    } else {
       let locationData = Object.keys(sessionLocationData())?.length;
-      if(locationData !== 0){
-        if(getUserType() === 2){
-          if(sessionLocationData().pin_address === "" || sessionLocationData().postal_code === ""){
+      if (locationData !== 0) {
+        if (getUserType() === 2) {
+          if (
+            sessionLocationData().pin_address === "" ||
+            sessionLocationData().postal_code === ""
+          ) {
             setShowLocation(true);
-          }else{
+          } else {
             setShowLocation(false);
             navigateToHome();
           }
-        }else{
-          if(sessionLocationData().pin_address === "" || sessionLocationData().street_address === "" ||
-            sessionLocationData().postal_code === "" || sessionLocationData().unit_number === ""){
+        } else {
+          if (
+            sessionLocationData().pin_address === "" ||
+            sessionLocationData().street_address === "" ||
+            sessionLocationData().postal_code === "" ||
+            sessionLocationData().unit_number === ""
+          ) {
             setShowLocation(true);
-          }else{
+          } else {
             setShowLocation(false);
             navigateToHome();
           }
         }
-      }else{
+      } else {
         setShowLocation(true);
       }
     }
@@ -83,28 +92,28 @@ function Landingbody() {
   const getGuestUserApi = async () => {
     setResetForm(!resetForm);
     let postObject = {
-      fullname          : "",
-      email             : "",
-      mobile            : "",
-      device_id         : "",
-      device_type       : "2",
-      device_token      : "123456789",
-      hear_about_us     : "",
-      hear_about_us_val : "",
-      app_id            : "2",
-      user_type         : "2",
+      fullname: "",
+      email: "",
+      mobile: "",
+      device_id: "",
+      device_type: "2",
+      device_token: "123456789",
+      hear_about_us: "",
+      hear_about_us_val: "",
+      app_id: "2",
+      user_type: "2",
     };
 
     try {
       let user = JSON.parse(sessionStorage.getItem("otpResponse"));
-      if(!user){
+      if (!user) {
         let response = await signupVerifyContinueApi(postObject);
       }
     } catch (e) {}
   };
 
   useEffect(() => {
-    if(window.innerWidth > 500){
+    if (window.innerWidth > 500) {
       setIsMobileLanding(true);
     }
   }, []);
@@ -112,93 +121,59 @@ function Landingbody() {
   return (
     <>
       {isMobileLandind ? (
-        <Row>
-          <Col xl="1" lg="1" md="1" sm="1" />
-
-          <Col xl="6" lg="6" md="6" sm="12">
-            <Row>
-              <Col lg="12" sm="12" md="12" className="mt-3">
-                <div>
-                  <Row>
-                    <Col lg="12" sm="12" md="12" className="mb-4">
-                      <Button className="FoodDeliveryButtonLanding ">
-                        <small>
-                          Food Delivery
-                          <img
-                            src={BurgerImage}
-                            className="ms-2 mb-2 BurgerImageLanding"
-                            alt="Burger"
-                          />
-                        </small>
-                      </Button>
-                    </Col>
-                  </Row>
-                  <Row></Row>
-                  <h1 className="QuickestText mt-5">
-                    <div className="textDivision">
-                      Quickest<small className="FoodLanding ms-2">Food</small>
-                      <br />
-                      <small className="DeliveryLanding">
-                        Delivery{" "}
-                        <span className="inTownTextLanding"> in Town</span>
-                      </small>
-                    </div>
-                  </h1>
-                </div>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col lg="10" sm="12" md="10" xs="12"></Col>
-            </Row>
-            <Row>
-              <Col lg="10" sm="12" md="10">
-                <div className="our_text  mt-3 ">
-                  <b>
-                    we will deliver your food within 30 minutes in your town,if
-                  </b>
+        <Row className="body-container">
+          <Col>
+            <div>
+              <Button className="FoodDeliveryButtonLanding ">
+                <small>
+                  Food Delivery
+                  <img
+                    src={BurgerImage}
+                    className="ms-2 mb-2 BurgerImageLanding"
+                    alt="Burger"
+                  />
+                </small>
+              </Button>
+            </div>
+            <div>
+              <h1 className="QuickestText">
+                <div className="textDivision">
+                  Quickest<small className="FoodLanding ms-2">Food</small>
                   <br />
-                  <b>we would fail,we will give the food free.</b>
+                  <small className="DeliveryLanding">
+                    Delivery <span className="inTownTextLanding"> in Town</span>
+                  </small>
                 </div>
-              </Col>
-            </Row>
-
-            <Row>
-              {/* <Col lg="12" xs="4" sm="4" /> */}
-              <Col sm="8" md="10" xs="8">
-                <Button
-                  className="order_button mt-5"
-                  onClick={() => {
-                    getGuestUserApi();
-                    showLocationPopup();
-                  }}
-                >
-                  {" "}
-                  Order your Food{" "}
-                  <RiSearchLine className="SearchIconLanding ms-1 py-1" />
-                </Button>
-              </Col>
-            </Row>
+              </h1>
+            </div>
+            <div className="our_text">
+              <b>we will deliver your food within 30 minutes in your town,if</b>
+              <br />
+              <b>we would fail,we will give the food free.</b>
+            </div>
+            <div>
+              <Button
+                type="button"
+                className="order_button"
+                onClick={() => {
+                  getGuestUserApi();
+                  showLocationPopup();
+                }}
+              >
+                Order your Food
+                <RiSearchLine className="SearchIconLanding ms-1 py-1" />
+              </Button>
+            </div>
           </Col>
-
-          <Col lg="5" sm="6" className="mb-3">
-            <img
-              className="ellipse mt-5 mb-5 ms-3"
-              src={ellipse}
-              alt="no"
-            ></img>
+          <Col>
+            <img className="ellipse" src={ellipse} alt="no"></img>
           </Col>
         </Row>
       ) : (
         <>
           <Row>
-            <Col xs="3" />
             <Col xs="5">
-              <img
-                className="ellipse mt-5 mb-5 ms-5"
-                src={ellipse}
-                alt="no"
-              ></img>
+              <img className="ellipse" src={ellipse} alt="no"></img>
             </Col>
           </Row>
           <Row>

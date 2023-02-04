@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-google-places-autocomplete";
 import Geocode from "react-geocode";
 import { useSelector, useDispatch } from "react-redux";
 import "./Location.css";
@@ -9,8 +11,6 @@ import { useFormik } from "formik";
 import { addressId } from "../../../constants/Utils";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import Autocomplete from "react-google-autocomplete";
-import { connect } from "react-redux";
 import { getUserType } from "../../../constants/Utils";
 import {
   addressdatas,
@@ -18,22 +18,17 @@ import {
   langDataMethod,
   latDataMethod,
 } from "../../../containers/app/features/CounterSlice";
-import swal from "sweetalert";
 import { addressValuesSession } from "../../../constants/Utils";
-import PropTypes from "prop-types";
-import { LocationPopupApi } from "../../../services/Landingservice";
-// import {
-//   getAddressData,
-//   tabValueData,
-// } from "../../RestaurentView/Redux/Actions/counterActions";
-import App from "./App";
+import {
+  LocationPopupApi,
+  postalcodeAPI,
+} from "../../../services/Landingservice";
+
 function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
   const AddressDatas = useSelector((state) => state.counter.addressdatavalues);
   const tabval = useSelector((state) => state.counter.tabvalue);
   const latval = useSelector((state) => state.counter.latdatas);
 
-  // console.log(AddressDatas);
-  // console.log(latval);
   const dispatch = useDispatch();
   const CloseLocationPopUp = () => {
     LocationPopUp(false); //callback function
@@ -54,11 +49,18 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
 
   useEffect(() => {
     if (value && value.label) {
-      // console.log(value.label);
       Geocode.fromAddress(value.label).then(
         (response) => {
           const { lat, lng } = response.results[0].geometry.location;
-          setLatLong({lat,lng})
+          setLatLong({ lat, lng });
+          postalcodeAPI(lat, lng).then((response) =>
+            formik.setFieldValue(
+              "postal_code",
+              response.data.results[0].address_components[
+                response.data.results[0].address_components.length - 1
+              ].long_name
+            )
+          );
         },
         (error) => {
           console.error(error);
@@ -74,22 +76,12 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
     dispatch(tabvaluedata(tabValue));
     dispatch(latDataMethod(latLong));
   };
-  // console.log(latLong?.lat)
-  // tabValueData(tabValue);
-  //    const Token=loginresponse?.data.data.token
-  // console.log(Token)
-  // useEffect(() => {
-  //   dispatch(addressdatas("catalogOne"));
-  //   dispatch(catalogRequest("catalogTwo"));
-  //   dispatch(catalogRequest("catalogThree"));
-  // }, []);
+
   let navigate = useNavigate();
   const navigateToHome = () => {
     navigate("/home");
   };
-  // console.log(guestLocationResponse())
 
-  // }
   const getLocationPopupApi = async () => {
     let locationPopUpObject = {
       latitude: "75.00003",
@@ -97,7 +89,7 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
       pin_address: value?.label,
       unit_number: formik.values.UnitNumber,
       street_address: formik.values.house,
-      postal_code: formik.values.postalCode,
+      postal_code: formik.values.postal_code,
       address_type: tabValue,
     };
 
@@ -109,10 +101,12 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
       ) {
         let LocationApiResponse = await LocationPopupApi(locationPopUpObject);
         if (addressId === null || addressValuesSession?.address_id !== "0") {
-          sessionStorage.setItem("isFirstTimeOpenPopup",true)
+          sessionStorage.setItem("isFirstTimeOpenPopup", true);
         }
 
-        // if (LocationApiResponse.status === 200) {
+        if (LocationApiResponse.status === 200) {
+          navigateToHome();
+        }
         //   swal({
         //     title: "Success!",
         //     text: "Your Location Updated SuccessFully!",
@@ -138,17 +132,14 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
       setMarkUsError("Please Select Address Type!");
     } else {
       setMarkUsError();
-
-      // console.log(tabValue);
     }
   };
-  //  console.log(AddressDatas)
 
   const initialValues = {
     addressLine: "",
     house: "",
     UnitNumber: "",
-    postalCode: "",
+    postal_code: "",
   };
   const onSubmit = (values) => {
     //Pass data through state in useNavigation
@@ -156,7 +147,7 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
     //   navigate("/home", {
     //     state: {
     //       addressLine: formik.values.addressLine,
-    //       postalCode: formik.values.postalCode,
+    //       postal_code: formik.values.postal_code,
     //     },
     //   });
     // }
@@ -164,18 +155,14 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
   };
 
   const validationSchema = yup.object({
-    // addressLine: yup
-    //   .string()
-    //   .required("This Field Can't Be Empty!"),
-
     house: yup.string(),
     UnitNumber: yup.string(),
 
-    postalCode: yup
+    postal_code: yup
       .string()
       .required("Enter Your Postal Code")
       .matches(/^[0-9\b]+$/, "Please Enter Digits Only")
-      .min(6, "Enter 6 digits PostalCode"),
+      .min(6, "Enter 6 digits postal_code"),
   });
 
   const formik = useFormik({
@@ -184,15 +171,13 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
     validationSchema,
   });
 
-  // let userResponse = JSON.parse(sessionStorage.getItem("otpResponse"));
-  // console.log(userResponse);
   useEffect(() => {
     formik.resetForm({
       values: {
         addressLine: "",
         house: "",
         UnitNumber: "",
-        postalCode: "",
+        postal_code: "",
       },
     });
   }, [resetForm]);
@@ -220,11 +205,9 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
     <>
       <Modal show={showLocation} onHide={CloseLocationPopUp} animation={true}>
         <Modal.Header className="locationPopUp_Header border-0" closeButton>
-          {/* <Col lg="1"></Col> */}
           <Col lg="10">
             <Modal.Title className="ms-2 mt-1">
               <b>Choose location</b>
-              {/* <App/> */}
             </Modal.Title>
             <hr width="80%" className="ms-2"></hr>
           </Col>
@@ -237,21 +220,8 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
           <Modal.Body>
             <Container>
               <Row>
-                <Col lg="11" md="11" sm="11" xs="11">
-                  <p></p>
+                <div className="input-style">
                   <Form.Label> Address Line 1</Form.Label>
-                  {/* <Form.Control
-                    name="firstname"
-                    className="form-control mt-2 mb-2"
-                    placeholder="Enter Your Address Line 1"
-                    id="addressLine"
-                    {...formik.getFieldProps("addressLine")}
-                  ></Form.Control>
-                  {formik.touched.addressLine && formik.errors.addressLine && (
-                    <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.addressLine}
-                    </div>
-                  )} */}
                   <GooglePlacesAutocomplete
                     apiKey="AIzaSyAZNYje65H5kEiuMuF_gFmDwloZLmuIv-I"
                     selectProps={{
@@ -259,6 +229,8 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                       onChange: setValue,
                     }}
                   />
+                </div>
+                <div className="input-style">
                   <Form.Label>BLK/House/Apartment No</Form.Label>
                   <Form.Control
                     name="house"
@@ -267,6 +239,8 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                     placeholder="Enter Your BLK/House/Apartment No"
                     {...formik.getFieldProps("house")}
                   ></Form.Control>
+                </div>
+                <div className="input-style">
                   <Form.Label>Unit Number</Form.Label>
                   <Form.Control
                     name="UnitNumber"
@@ -275,54 +249,24 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                     placeholder="Enter Your Unit Number"
                     {...formik.getFieldProps("UnitNumber")}
                   ></Form.Control>
-
+                </div>
+                <div className="input-style">
                   <Form.Label> Postal Code</Form.Label>
                   <Form.Control
                     name="lastname"
                     className="form-control mt-2 mb-2"
                     placeholder="Enter Your Postal Code"
-                    id="postalCode"
+                    id="postal_code"
                     maxLength="6"
-                    {...formik.getFieldProps("postalCode")}
+                    disabled={true}
+                    {...formik.getFieldProps("postal_code")}
                   ></Form.Control>
-                  {formik.touched.postalCode && formik.errors.postalCode && (
+                  {formik.touched.postal_code && formik.errors.postal_code && (
                     <div className="mb-2" style={{ color: "red" }}>
-                      {formik.errors.postalCode}
+                      {formik.errors.postal_code}
                     </div>
                   )}
-
-                  {/* <Autocomplete
-  apiKey={YOUR_GOOGLE_MAPS_API_KEY}
-  style={{ width: "90%" }}
-  onPlaceSelected={(place) => {
-    console.log(place);
-  }}
-  options={{
-    types: ["(regions)"],
-    componentRestrictions: { country: "ru" },
-  }}
-  defaultValue="Amsterdam"
-/>; */}
-
-                  {/* <GooglePlacesAutocomplete
-        GooglePlacesDetailsQuery={{ fields: "geometry" }}
-        fetchDetails={true} // you need this to fetch the details object onPress
-        placeholder="Search"
-        query={{
-          key:  "AIzaSyAZNYje65H5kEiuMuF_gFmDwloZLmuIv-I",
-          language: "en", // language of the results
-        }}
-        onPress={(data, details= null) => {
-          console.log("data", data);
-          console.log("details", details);
-          console.log(JSON.stringify(details?.geometry?.location));
-        }}
-        onFail={(error) => console.error(error)} /> */}
-
-                  {/*
-
-                <App/> */}
-                </Col>
+                </div>
               </Row>
             </Container>
             <p className="ms-2"> Mark as</p>
@@ -339,7 +283,6 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                     }
                     onClick={() => handleClicked("Home")}
                   >
-                    {" "}
                     Home
                   </Button>
                 </Col>
@@ -354,8 +297,7 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                     }
                     onClick={() => handleClicked("Office")}
                   >
-                    {" "}
-                    office{" "}
+                    office
                   </Button>
                 </Col>
 
@@ -370,8 +312,7 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
                     }
                     onClick={() => handleClicked("Other")}
                   >
-                    {" "}
-                    other{" "}
+                    other
                   </Button>
                 </Col>
                 <p className="mt-2" style={{ color: "red" }}>
@@ -381,23 +322,16 @@ function Location({ resetForm, LocationPopUp, showLocation, tabValueData }) {
             </Container>
             <Container>
               <Row>
-                <Col lg="2" md="2" sm="2"></Col>
-                <Col lg="8" md="8" sm="8">
-                  <Button
-                    className="confirm_btn "
-                    type="submit"
-                    onClick={() => {
-                      getLocationPopupApi();
-                      showmarkUsError();
-                      navigateToHome();
-
-                    }}
-                  >
-                    Confirm & Proceed
-                  </Button>
-                  <br />
-                  <br />
-                </Col>
+                <Button
+                  className="confirm_btn "
+                  type="submit"
+                  onClick={() => {
+                    getLocationPopupApi();
+                    showmarkUsError();
+                  }}
+                >
+                  Confirm & Proceed
+                </Button>
               </Row>
             </Container>
           </Modal.Body>

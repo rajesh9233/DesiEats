@@ -1,18 +1,16 @@
 import React from "react";
-import MenuItems from '../../components/Restaurent__list/Menu/MenuItems'
-import MenuHeader from "../../components/Restaurent__list/Menu/MenuHeader";
-import Menu from "../../components/Restaurent__list/Menu/MenuItems";
+import MenuItems from "../../components/Restaurent__list/Menu/MenuItems";
+import LandingHeader from "../../components/Landing/Landing_header/Landingheader";
 function restaurentList() {
   return (
     <>
-    <div>
-    <MenuHeader/>
-    </div>
-    <div>
-        <MenuItems/>
+      <div>
+        <LandingHeader isRestaurant={true} />
+      </div>
+      <div>
+        <MenuItems />
       </div>
     </>
-    
   );
 }
 

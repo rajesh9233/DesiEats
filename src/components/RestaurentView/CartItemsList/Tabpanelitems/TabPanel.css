@@ -1,0 +1,62 @@
+.tab-container{
+  width:100%;
+}
+
+.cat-name{
+  margin: 2% 0 2% 4%;
+}
+
+.item-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 95%;
+  min-width: 75%;
+  margin: 4%;
+}
+
+.item-card div{
+  margin: 0 2%;
+}
+
+.item-card-container{
+  width: 94%;
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: auto;
+}
+
+.category-theme{
+  margin: 0 0 4% 0;
+}
+
+.btn-div-cont{
+  position: relative;
+}
+
+.add-btn{
+  position: absolute;
+  right: 25%;
+  bottom: 10%;
+}
+
+.card1{
+  width:10%;
+}
+
+.card2{
+  width:60%;
+}
+
+.card3{
+  width:30%
+}
+
+@media screen and (max-width: 780px){
+  .item-card-container{
+    width: 94%;
+    display: grid;
+    grid-template-columns: auto;
+    margin: auto;
+  }
+}

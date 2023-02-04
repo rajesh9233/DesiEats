@@ -9,10 +9,12 @@ function FoodsCatagory({ restByCatagory, handleClicker, restaurantTab }) {
   const [tabValues, setTabValues] = React.useState("1");
   const handleClicked = async (value) => {
     await restaurantTab(value);
-
     setTabValues(value);
   };
-  // console.log(tabValues);
+
+  const handleRefreshdata = async () => {
+    await restaurantTab(tabValues);
+  };
 
   return (
     <>
@@ -40,9 +42,15 @@ function FoodsCatagory({ restByCatagory, handleClicker, restaurantTab }) {
         </Col>
       </Row>
       {tabValues === "1" || tabValues === "" ? (
-        <RestaurentFoods restByCatagory={restByCatagory} />
+        <RestaurentFoods
+          restByCatagory={restByCatagory}
+          handleRefreshdata={handleRefreshdata}
+        />
       ) : (
-        <HomeMadeFoods restByCatagory={restByCatagory} />
+        <HomeMadeFoods
+          restByCatagory={restByCatagory}
+          handleRefreshdata={handleRefreshdata}
+        />
       )}
     </>
   );

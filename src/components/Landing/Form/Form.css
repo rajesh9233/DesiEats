@@ -58,6 +58,7 @@ border-radius: 8%;
 
 .form-control{
 border: 1px solid black !important;
+z-index: 0 !important;
 }
 .signup_button_form{
 width: 100%;
@@ -93,12 +94,29 @@ background-color: #FF6838!important;
 border: 1px solid black!important;
 }
 .HearAbout_Write_text{
-border-top:none !important;
-border-left: none!important;
-border-right: none!important;
-border-radius: 0%;
+  border-top:none !important;
+  border-left: none!important;
+  border-right: none!important;
+  border-radius: 0%;
+  width: 65%;
+  margin: 2% 0 0 14%;
 }
 .FormsPopupHeader.modal-header .btn-close{
 position: relative;
 top:17px;
+}
+
+.form-containers{
+  display: flex;
+  flex-direction: row;
+}
+
+.btn-container{
+  width: 50%;
+}
+
+.btn-container button {
+  width: 75%;
+  margin: auto;
+  display: block;
 }

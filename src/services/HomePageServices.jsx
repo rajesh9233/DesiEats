@@ -121,7 +121,7 @@ export const searchRestaurantsApi = async (userData) => {
 //------------------WhishList  API--------------------------------
 //---------------------------------------------------------
 
-export const whishListApi = async (userData) => {
+export const whishListPostApi = async (userData) => {
   try {
     let whishListDataApi = await axios({
       url: getUrl()+ "/customerWishlist/wishlist_action",

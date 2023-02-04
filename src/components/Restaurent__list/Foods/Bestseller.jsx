@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Card, Badge } from "react-bootstrap";
 import { ArrowRight, ArrowLeft } from "react-bootstrap-icons";
-import { whishListApi } from "../../../services/HomePageServices";
+import { whishListPostApi } from "../../../services/HomePageServices";
 import { useNavigate } from "react-router-dom";
 import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,7 +19,6 @@ function Best_seller({ TrendingRestaurent }) {
     (state) => state.counter.homepagedatadeatils
   );
   const BestSellerDatas = homePageDatas?.best_sellers;
-  
 
   const [postBestSeller, setPostBestSeller] = useState({
     page: 0,
@@ -28,24 +27,24 @@ function Best_seller({ TrendingRestaurent }) {
   });
   const [bestSellerResponse, setBestSellerResponse] = useState();
 
-  useEffect(() => {
-    const bestSellerDataApi = async (item) => {
-      try {
-        let bestSellerDataResponse = await bestSellerApi(postBestSeller);
+  const bestSellerDataApi = async (item) => {
+    try {
+      let bestSellerDataResponse = await bestSellerApi(postBestSeller);
 
-        setBestSellerResponse(bestSellerDataResponse.data.data.best_sellers);
-      } catch (e) {}
-    };
+      setBestSellerResponse(bestSellerDataResponse.data.data.best_sellers);
+    } catch (e) {}
+  };
+  useEffect(() => {
     bestSellerDataApi();
   }, [postBestSeller]);
 
   // console.log(postBestSeller)
   const nextButton = () => {
     setPostBestSeller({ ...postBestSeller, page: postBestSeller.page + 1 });
-//  console.log(bestSellerResponse)
+    //  console.log(bestSellerResponse)
   };
 
-  //Update Data 
+  //Update Data
   // setFormdata((f) => ({
   //   ...f,
   //   fullname: "",
@@ -60,7 +59,7 @@ function Best_seller({ TrendingRestaurent }) {
 
   let navigate = useNavigate();
   const ShowRestaurantData = (item) => {
-    navigate("/restaurant");
+    navigate("/restaurants");
     dispatch(restaurantIdDataMethod(item.restaurant_id));
     sessionStorage.setItem("restaurantData", item.restaurant_id);
   };
@@ -73,7 +72,7 @@ function Best_seller({ TrendingRestaurent }) {
       page: "0",
     };
     try {
-      await whishListApi(postBestSellerObject);
+      await whishListPostApi(postBestSellerObject);
     } catch (e) {
       // console.log(e);
     }
@@ -105,32 +104,49 @@ function Best_seller({ TrendingRestaurent }) {
     }
   }, []);
 
+  const handleFavourites = async (isfavourite, item) => {
+    let postData = {
+      restaurant_id: item.restaurant_id,
+      action_type: isfavourite,
+    };
+    console.log(isfavourite);
+    console.log(item);
+    let wishListResp = await whishListPostApi(postData);
+    if (wishListResp) {
+      bestSellerDataApi();
+    }
+  };
+
   return (
     <>
       {/*--------------------------- BEST SELLER------------------------------------------- */}
       <Container>
-        <Row className="mt-2">
-          <Col lg="6" md="6" sm="6">
+        <div className="trending-container">
+          <div>
             <h2>Best Seller on Desi Eats</h2>
-          </Col>
-          <Col lg="6" md="6" sm="6" style={{ textAlign: "right" }}>
-            <Button className="arrow_left " onClick={() => {PreviousButton();}}>
+          </div>
+          <div className="navigation-btn">
+            <Button
+              className="navigation-left-arrow"
+              onClick={() => PreviousButton()}
+            >
               <ArrowLeft className="arrow-leftIcon" />
-            </Button>{" "}
-            {""}
-            <Button className="arrow_right" onClick={() => nextButton()}>
+            </Button>
+            <Button
+              className="navigation-right-arrow"
+              onClick={() => nextButton()}
+            >
               <ArrowRight className="arrow_rightIcon" />
             </Button>
-          </Col>
-        </Row>
-        <Row></Row>
+          </div>
+        </div>
       </Container>
 
       {/* -------------BEST SELLET RESTAURANTS LIST -------------------------*/}
 
       {!isMobileBestSeller ? (
         <Container>
-          <Row className="mt-3">
+          <Row>
             {bestSellerResponse?.slice(0, 4)?.map((item, index) => (
               //Card Size splits 3 - 3
               <Col
@@ -171,10 +187,16 @@ function Best_seller({ TrendingRestaurent }) {
                       HandleClick(item);
                     }}
                   >
-                    {clickedItems.indexOf(item.restaurant_id) === -1 ? (
-                      <AiOutlineHeart className="favourite" />
+                    {item.isWishList === "1" ? (
+                      <AiFillHeart
+                        className="favourite"
+                        onClick={() => handleFavourites(2, item)}
+                      />
                     ) : (
-                      <AiFillHeart className="favourite" />
+                      <AiOutlineHeart
+                        className="favourite"
+                        onClick={() => handleFavourites(1, item)}
+                      />
                     )}
                   </Badge>
                   <Row>
@@ -368,10 +390,16 @@ function Best_seller({ TrendingRestaurent }) {
                           HandleClick(item);
                         }}
                       >
-                        {clickedItems.indexOf(item.restaurant_id) === -1 ? (
-                          <AiOutlineHeart className="favourite" />
+                        {item.isWishList === "1" ? (
+                          <AiFillHeart
+                            className="favourite"
+                            onClick={() => handleFavourites(2, item)}
+                          />
                         ) : (
-                          <AiFillHeart className="favourite" />
+                          <AiOutlineHeart
+                            className="favourite"
+                            onClick={() => handleFavourites(1, item)}
+                          />
                         )}
                       </Badge>
                     </Card>
