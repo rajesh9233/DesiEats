@@ -29,15 +29,19 @@ function All_restaurent({}) {
   });
   const [postAllResponse, setPostAllResponse] = useState([]);
 
-  const postAllRestaurantDataApi = async (item) => {
+  const postAllRestaurantDataApi = async (flag) => {
     try {
       let bestSellerDataResponse = await searchRestaurantsApi(
         postAllRestaurant
       );
-      setPostAllResponse([
-        ...postAllResponse,
-        ...bestSellerDataResponse.data.data.all_restaurant,
-      ]);
+      if (flag) {
+        setPostAllResponse(bestSellerDataResponse.data.data.all_restaurant);
+      } else {
+        setPostAllResponse([
+          ...postAllResponse,
+          ...bestSellerDataResponse.data.data.all_restaurant,
+        ]);
+      }
     } catch (e) {}
   };
 
@@ -62,9 +66,7 @@ function All_restaurent({}) {
       }
       return [...prevState, item.restaurant_id];
     });
-
   };
-
 
   const dispatch = useDispatch();
   const [isMobileAllRestaurant, setIsMobileAllRestaurant] = useState(false);
@@ -85,7 +87,7 @@ function All_restaurent({}) {
     };
     let wishListResp = await whishListPostApi(postData);
     if (wishListResp) {
-      postAllRestaurantDataApi();
+      postAllRestaurantDataApi(true);
     }
   };
 

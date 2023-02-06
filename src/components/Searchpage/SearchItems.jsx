@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 import RatingStart from "../../Asserts/RestaurentList/RatingStar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { restaurantIdDataMethod } from "../../containers/app/features/CounterSlice";
-import { homePageDetailsApi, whishListPostApi } from "../../services/HomePageServices";
+import {
+  homePageDetailsApi,
+  whishListPostApi,
+} from "../../services/HomePageServices";
 import { WhishListApi } from "../../services/ProfilePageServices";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
@@ -197,7 +200,6 @@ const DummyItem = ({ searchDatas }) => {
     // sessionStorage.setItem("restaurantData", item.restaurant_id);
   };
 
-
   let trending = homepageResponse?.trending_on;
   const [postHomePage, setPostHomePage] = useState({
     page: 0,
@@ -205,8 +207,6 @@ const DummyItem = ({ searchDatas }) => {
     lng: "103.8452356",
   });
 
-  
- 
   useEffect(() => {
     const whishListApiValuesApi = async () => {
       let postWishListObject = {
@@ -254,7 +254,7 @@ const DummyItem = ({ searchDatas }) => {
       action_type: isfavourite,
     };
     let wishListResp = await whishListPostApi(postData);
-    console.log(wishListResp)
+    console.log(wishListResp);
     if (wishListResp) {
     }
   };
@@ -270,133 +270,125 @@ const DummyItem = ({ searchDatas }) => {
 
         <Row className="scrollbutton mt-4">
           {searchDatas?.map((item, index) => (
-            <Col
-            lg="3"
-            mb="3"
-            sm="3"
-            className="d-flex grid-margin mb-5 gap-3"
-          >
-            <Card
-              className="TrendingCardHomepage"
-              onClick={() => {
-                ShowRestaurantData(item);
-              }}
-            >
-              <img
-                src={item.banner_image}
-                alt="no valid data"
-                className="
+            <Col lg="3" mb="3" sm="3" className="d-flex grid-margin mb-5 gap-3">
+              <Card
+                className="TrendingCardHomepage"
+                onClick={() => {
+                  ShowRestaurantData(item);
+                }}
+              >
+                <img
+                  src={item.banner_image}
+                  alt="no valid data"
+                  className="
    trendingImage 
    img-responsive img-portfolio img-hover
    img-fluid "
-              />
+                />
 
-              <Badge
-                className="minimum_value_trending mb-3"
-                variant="outlined"
-              >
-                Minimum Order Value :{item.min_order_value}
-              </Badge>
+                <Badge
+                  className="minimum_value_trending mb-3"
+                  variant="outlined"
+                >
+                  Minimum Order Value :{item.min_order_value}
+                </Badge>
 
-              <Badge
-                className="DeliveryHandledByTrending mb-3"
-                variant="outlined"
-              >
-                Delivery Handled By{" "}
-                {item.delivery_handled_by === "1"
-                  ? "restaurant"
-                  : " Kerala Eats"}
-              </Badge>
+                <Badge
+                  className="DeliveryHandledByTrending mb-3"
+                  variant="outlined"
+                >
+                  Delivery Handled By{" "}
+                  {item.delivery_handled_by === "1"
+                    ? "restaurant"
+                    : " Kerala Eats"}
+                </Badge>
 
-              <Row>
-                {/* inside card splitting size 8-4 */}
-                <Col lg="8">
-                  <div className="ms-2 mt-2 ">
-                    <small className=" Restaurent_Title">
-                      {" "}
-                      {item.rest_name}
-                    </small>
-                    <br />
-                    <small className="mb-2 Restaurent_SubTitle text-muted">
-                      {item.res_description}
-                    </small>
-                  </div>
+                <Row>
+                  {/* inside card splitting size 8-4 */}
+                  <Col lg="8">
+                    <div className="ms-2 mt-2 ">
+                      <small className=" Restaurent_Title">
+                        {" "}
+                        {item.rest_name}
+                      </small>
+                      <br />
+                      <small className="mb-2 Restaurent_SubTitle text-muted">
+                        {item.res_description}
+                      </small>
+                    </div>
 
-                  <Badge
-                    className="delivery_by mt-2 mb-5"
-                    variant="outlined"
-                  >
-                    {item.Delivery_by}
-                  </Badge>
-                </Col>
-                <Col lg="4">
-                  <Badge className="Restaurent_Open_Close mt-2">
-                    <small>Open</small>
-                  </Badge>
-                  <br />
-                  <small>
-                    <img
-                      src={RatingStart}
-                      alt="RatingCount"
-                      className="Restaurent_Rating_star mx-1 pb-1"
-                    />
-                    <small className="RatingCountItemsRestaurant">
-                      {item.avg_rating}/5
-                    </small>
-                  </small>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="7">
-                  <Badge
-                    className="open_hours_badge ms-2"
-                    variant="outlined"
-                  >
-                    Open Hours-{item.open_time}-{item.close_time}
-                  </Badge>
-                </Col>
-                <Col lg="4">
-                  <Badge className="delivery_time">
-                    {item.del_prep_time} | {item.distance}km{" "}
-                  </Badge>
-                </Col>
-              </Row>
-              <Row>
-                <Col lg="7">
-                  <div className="ms-2">
-                    <Badge
-                      className="break_hours_badge mt-2 mb-3"
-                      variant="outlined"
-                    >
-                      Break Hours-{item.break_start_time} -{" "}
-                      {item.break_end_time}
+                    <Badge className="delivery_by mt-2 mb-5" variant="outlined">
+                      {item.Delivery_by}
                     </Badge>
-                  </div>
-                </Col>
-                <Col lg="3" />
-              </Row>
-              <Badge
-                className="Favourite_Badge_HomePage"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  HandleClick(item);
-                }}
-              >
-                {item.isWishList === "1" ? (
-                  <AiFillHeart
-                    className="favourite"
-                    onClick={() => handleFavourites(2, item)}
-                  />
-                ) : (
-                  <AiOutlineHeart
-                    className="favourite"
-                    onClick={() => handleFavourites(1, item)}
-                  />
-                )}
-              </Badge>
-            </Card>
-          </Col>
+                  </Col>
+                  <Col lg="4">
+                    <Badge className="Restaurent_Open_Close mt-2">
+                      <small>Open</small>
+                    </Badge>
+                    <br />
+                    <small>
+                      <img
+                        src={RatingStart}
+                        alt="RatingCount"
+                        className="Restaurent_Rating_star mx-1 pb-1"
+                      />
+                      <small className="RatingCountItemsRestaurant">
+                        {item.avg_rating}/5
+                      </small>
+                    </small>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="7">
+                    <Badge className="open_hours_badge ms-2" variant="outlined">
+                      Open Hours-{item.open_time}-{item.close_time}
+                    </Badge>
+                  </Col>
+                  <Col lg="4">
+                    <Badge className="delivery_time">
+                      {item.del_prep_time} | {item.distance}km{" "}
+                    </Badge>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg="7">
+                    <div className="ms-2">
+                      <Badge
+                        className="break_hours_badge mt-2 mb-3"
+                        variant="outlined"
+                      >
+                        Break Hours-{item.break_start_time} -{" "}
+                        {item.break_end_time}
+                      </Badge>
+                    </div>
+                  </Col>
+                  <Col lg="3" />
+                </Row>
+                <Badge
+                  className="Favourite_Badge_HomePage"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    HandleClick(item);
+                  }}
+                >
+                  {item.isWishList === "1" ? (
+                    <AiFillHeart
+                      className="favourite"
+                      onClick={() => handleFavourites(2, item)}
+                    />
+                  ) : (
+                    <AiOutlineHeart
+                      className="favourite"
+                      onClick={() => handleFavourites(1, item)}
+                    />
+                  )}
+                </Badge>
+              </Card>
+            </Col>
           ))}
+          {!searchDatas || searchDatas.length == 0 ? (
+            <p className="no-data">Search for restaurents or food</p>
+          ) : null}
         </Row>
       </Container>
     </>

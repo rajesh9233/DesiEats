@@ -6,8 +6,6 @@ import { Col, Row, Button } from "react-bootstrap";
 import { FaCircle } from "react-icons/fa";
 import FoodImage from "../../../../Asserts/banners/image1.jpg";
 import { ProductListing } from "../../../../constants/HomePageResponse";
-// import { increment, decrement } from "../../Redux/Actions/counterActions";
-// import { connect } from "react-redux";
 import {
   addRemoveProductCartApi,
   manageProductCheckoutApi,
@@ -15,11 +13,7 @@ import {
   checkoutDetailsPostApi,
 } from "../../../../services/CartCheckOutServices";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  cartQuantityChange,
-  decrementValue,
-  incrementValue,
-} from "../../../../containers/app/features/CounterSlice";
+import { cartQuantityChange } from "../../../../containers/app/features/CounterSlice";
 
 import "./Popular.css";
 import {
@@ -51,7 +45,13 @@ function a11yProps(index) {
   };
 }
 
-const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
+const BasicTabs = ({
+  ProductData,
+  isToggle,
+  filterProductItems,
+  globalCheckoutDetails,
+  globalCheckoutCallback,
+}) => {
   const [value, setValue] = useState(0);
   const [productItems, setProductItems] = useState();
   const [checkOutDetails, setCheckOutDetails] = useState();
@@ -109,7 +109,7 @@ const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
 
   useEffect(() => {
     if (ProductData) {
-      cartQuantityUpdate(checkOutDetails);
+      cartQuantityUpdate(checkOutDetails ? checkOutDetails : []);
     }
   }, [checkOutDetails, ProductData]);
 
@@ -118,37 +118,30 @@ const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
   }, [CartQuantityChangeViceVersa]);
 
   const cartQuantityUpdate = (productQuantityList) => {
-    if (ProductData) {
-      productQuantityList?.map((productQuantityObj) => {
-        setProductItems(() =>
-          ProductData?.category_list?.map((obj, i) => {
-            if (obj.category_id === productQuantityObj.category_id) {
-              obj.product_list.forEach((obj2) => {
-                if (obj2.product_id === productQuantityObj.product_id) {
-                  obj2.counter = productQuantityObj.product_quantity;
-                }
-              });
+    console.log("productQuantityList", productQuantityList);
+    if (productQuantityList && productQuantityList.length > 0) {
+      if (ProductData) {
+        productQuantityList?.map((productQuantityObj) => {
+          setProductItems(() =>
+            ProductData?.category_list?.map((obj, i) => {
+              if (obj.category_id === productQuantityObj.category_id) {
+                obj.product_list.forEach((obj2) => {
+                  if (obj2.product_id === productQuantityObj.product_id) {
+                    obj2.counter = productQuantityObj.product_quantity;
+                  }
+                });
+                return obj;
+              }
               return obj;
-            }
-            return obj;
-          })
-        );
-      });
+            })
+          );
+        });
+      }
     }
   };
 
   useEffect(() => {
     if (isToggle) {
-      // setProductItems(() =>
-      //   filterProduct.filter((obj, i) => {
-      //     const list = obj.product_list;
-      //     let result = list.filter((obj2) => {
-      //       return obj2.is_product_veg == "1";
-      //     });
-      //     obj.product_list = result;
-      //     return obj;
-      //   })
-      // );
       let newArray = [...filterProduct];
       let resultArray = [];
       newArray.map((obj, i) => {
@@ -187,7 +180,9 @@ const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
         "addRemoveProductCartApiValuesApiValuesResponse",
         addRemoveProductCartApiValuesApiValuesResponse
       );
-      // setProductItems(addRemoveProductCartApiValuesApiValuesResponse);
+      if (addRemoveProductCartApiValuesApiValuesResponse) {
+        globalCheckoutCallback();
+      }
     } catch (e) {}
   };
 
@@ -303,23 +298,23 @@ const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
                         <div className="add-btn">
                           {data.counter && data.counter > 0 ? (
                             <Button id={index}>
-                              <small>
-                                <span
-                                  onClick={() => {
-                                    handleDecrement(data, item);
-                                  }}
-                                >
-                                  -
-                                </span>
-                                <span className="count"> {data.counter} </span>
-                                <span
-                                  onClick={() => {
-                                    handleIncrement(data, item);
-                                  }}
-                                >
-                                  +
-                                </span>
-                              </small>
+                              <div
+                                className="in-de-btn"
+                                onClick={() => {
+                                  handleDecrement(data, item);
+                                }}
+                              >
+                                -
+                              </div>
+                              <div className="count"> {data.counter} </div>
+                              <div
+                                className="in-de-btn"
+                                onClick={() => {
+                                  handleIncrement(data, item);
+                                }}
+                              >
+                                +
+                              </div>
                             </Button>
                           ) : (
                             <Button
@@ -327,7 +322,7 @@ const BasicTabs = ({ ProductData, isToggle, filterProductItems }) => {
                                 handleAdd(data, item);
                               }}
                             >
-                              <small>Add</small>
+                              <div className="add-tab-btn">Add</div>
                             </Button>
                           )}
                         </div>

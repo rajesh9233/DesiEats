@@ -14,16 +14,16 @@
   }
   
   body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 8px;               
   }
   
   body::-webkit-scrollbar-track {
-    background: white;        /* color of the tracking area */
+    background: white;        
   }
   
   body::-webkit-scrollbar-thumb {
-    background-color: orangered;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
+    background-color: orangered;   
+    border-radius: 20px;      
   }
 
   body {

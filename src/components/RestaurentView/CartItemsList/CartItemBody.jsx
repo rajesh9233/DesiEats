@@ -10,37 +10,45 @@ import Switch from "@mui/material/Switch";
 import RatingStart from "../../../Asserts/RestaurentList/RatingStar.png";
 import { ProductListingApi } from "../../../services/RestaurantViewPageServices";
 import Trending from "../../Restaurent__list/Foods/Trending";
-function CartItemBody({ restaurentlist }) {
+function CartItemBody({ globalCheckoutDetails, globalCheckoutCallback }) {
   //Product Listing Data API :-
   //-----------------------------
   const [isToggle, setIsToggle] = useState();
   const restaurantDatas = useSelector((state) => state.counter.restaurantid);
   const [productItems, setProductItems] = useState([]);
   const [filterProductItems, setFilterProductItems] = useState([]);
-  useEffect(() => {
-    const productListingValuesApi = async () => {
-      let postProductListingValuesObject = {
-        page: "",
-        limit: "",
-        lat: "",
-        lng: "",
-        restaurant_id: sessionStorage.getItem("restaurantData")
-          ? sessionStorage.getItem("restaurantData")
-          : restaurantDatas,
-        date_timestamp: "1673524004",
-        is_veg: "2", //# 1 - Veg 2 - Non veg
-      };
 
-      try {
-        let productListingValuesResponse = await ProductListingApi(
-          postProductListingValuesObject
-        );
-        setProductItems(productListingValuesResponse.data?.data);
-        setFilterProductItems(productListingValuesResponse.data?.data);
-      } catch (e) {}
+  const productListingValuesApi = async () => {
+    let postProductListingValuesObject = {
+      page: "",
+      limit: "",
+      lat: "",
+      lng: "",
+      restaurant_id: sessionStorage.getItem("restaurantData")
+        ? sessionStorage.getItem("restaurantData")
+        : restaurantDatas,
+      date_timestamp: "1673524004",
+      is_veg: "2", //# 1 - Veg 2 - Non veg
     };
+
+    try {
+      let productListingValuesResponse = await ProductListingApi(
+        postProductListingValuesObject
+      );
+      setProductItems(productListingValuesResponse.data?.data);
+      setFilterProductItems(productListingValuesResponse.data?.data);
+    } catch (e) {}
+  };
+
+  useEffect(() => {
     productListingValuesApi();
   }, []);
+
+  useEffect(() => {
+    if(!globalCheckoutDetails?.cart_products){
+      productListingValuesApi();
+    }
+  }, [globalCheckoutDetails])
 
   const toggleSwitch = (event) => {
     setIsToggle(event.target.checked);
@@ -136,13 +144,12 @@ function CartItemBody({ restaurentlist }) {
           </div>
         </div>
 
-        {/* {productItems ? (
-          <BasicTabs ProductData={productItems} filterProductItems={filterProductItems} isToggle={isToggle} />
-        ) : null} */}
         <BasicTabs
           ProductData={productItems}
           filterProductItems={filterProductItems}
           isToggle={isToggle}
+          globalCheckoutDetails={globalCheckoutDetails}
+          globalCheckoutCallback={globalCheckoutCallback}
         />
       </Card>
     </>

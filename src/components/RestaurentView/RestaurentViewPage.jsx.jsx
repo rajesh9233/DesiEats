@@ -9,10 +9,20 @@ import { AiTwotoneHome } from "react-icons/ai";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { ImLocation } from "react-icons/im";
 import { AllAddressApi } from "../../services/ProfilePageServices";
+import { checkoutDetailsPostApi } from "../../services/CartCheckOutServices";
+import {
+  addressValuesSession,
+  getName,
+  getUserData,
+  sessionLocationData,
+} from "../../constants/Utils";
 
 function RestaurentHeader() {
   const [allAddressData, setAllAddressData] = useState([]);
   const [activeAddress, setActiveAddress] = useState();
+  const [globalCheckoutDetails, setGlobalCheckoutDetails] = useState([]);
+
+  let userName = getName() ? getName()[0] : null;
 
   const AllAddressDataApi = async () => {
     let postAllAddressObj = {
@@ -26,8 +36,36 @@ function RestaurentHeader() {
     } catch (e) {}
   };
 
+  const checkoutPostDetailsValuesApi = async (data) => {
+    let postcheckoutDetailsObjectValuesObject = {
+      restaurant_id: sessionStorage.getItem("restaurantData")
+        ? sessionStorage.getItem("restaurantData")
+        : null,
+      order_type: "1",
+      pickup_time: "1675258591",
+      latitude: addressValuesSession()?.latitude,
+      longitude: addressValuesSession()?.longitude,
+      pin_address: sessionLocationData()?.pin_address,
+      delivery_name: userName ? userName : null,
+      delivery_email: getUserData()?.email,
+      delivery_mobile: getUserData()?.mobile,
+      unit_number: sessionLocationData()?.unit_number,
+      street_address: sessionLocationData()?.street_address,
+      postal_code: sessionLocationData()?.postal_code,
+      date_timestamp: "1675258591",
+    };
+
+    try {
+      let checkoutPostDetailsResponse = await checkoutDetailsPostApi(
+        postcheckoutDetailsObjectValuesObject
+      );
+      setGlobalCheckoutDetails(checkoutPostDetailsResponse?.data?.data);
+    } catch (e) {}
+  };
+
   useEffect(() => {
     AllAddressDataApi();
+    checkoutPostDetailsValuesApi();
   }, []);
 
   const handleAddressOnChange = (e) => {
@@ -47,7 +85,13 @@ function RestaurentHeader() {
 
   return (
     <div className="res-container">
-      <div className="restaurent-header-container">
+      <div
+        className={
+          globalCheckoutDetails?.cart_products
+            ? "restaurent-header-container"
+            : "restaurent-header-container-full-width"
+        }
+      >
         <div className="res-image-container">
           <DesiEatsImage />
           <div className="res-adress-container">
@@ -91,11 +135,19 @@ function RestaurentHeader() {
             </div>
           </div>
         </div>
-        <CartItemBody />
+        <CartItemBody
+          globalCheckoutDetails={globalCheckoutDetails}
+          globalCheckoutCallback={checkoutPostDetailsValuesApi}
+        />
       </div>
-      <div className="res-cart-container">
-        <CartItems />
-      </div>
+      {globalCheckoutDetails?.cart_products ? (
+        <div className="res-cart-container">
+          <CartItems
+            globalCheckoutDetails={globalCheckoutDetails}
+            globalCheckoutCallback={checkoutPostDetailsValuesApi}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

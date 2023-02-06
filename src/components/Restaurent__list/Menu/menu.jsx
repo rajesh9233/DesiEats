@@ -130,9 +130,9 @@ function Menu(props) {
   return (
     <>
       {/*----- ----------------------------CATEGORY---------------------------------------------- */}
-<p>ok</p>
-<P>KIOJDIO</P>
-OKIYUHK
+      <p>ok</p>
+      <P>KIOJDIO</P>
+      OKIYUHK
       <Container>
         <Row className="gap">
           <Col lg="2" md="2" sx="4"></Col>
@@ -147,7 +147,9 @@ OKIYUHK
             >
               <Card
                 // style={{ width: "94%", height: "90%" }}
-                className={isActive === item.id ? "activeclass" : "menucard_restaurant"}
+                className={
+                  isActive === item.id ? "activeclass" : "menucard_restaurant"
+                }
                 onClick={() => {
                   HandleClick(item);
                   confirmLocation();
@@ -187,28 +189,7 @@ OKIYUHK
       ) : (
         <DineinRestaurents />
       )}
-
-
-<AllRestaurent/>
-
-
-
-
-
-
-
-
-
-
-
-      {/* {component ? (
-        <>
-          <Trending />
-          <Bestseller />
-          <AllRestaurent />
-        </>
-      ) : null}
-      {contentshow && component === false ? contentshow : null} */}
+      <AllRestaurent />
     </>
   );
 }

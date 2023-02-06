@@ -35,10 +35,29 @@
 }
 
 .add-btn{
-  position: absolute;
+  /* position: absolute;
   right: 25%;
-  bottom: 10%;
+  bottom: 10%; */
+  width: 100%;
+    display: flex;
+    justify-content: center;
 }
+
+.add-btn button{
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  justify-content: space-between;
+}
+
+.in-de-btn{
+  width: 50%;
+}
+
+.add-tab-btn{
+  margin: auto !important;
+}
+
 
 .card1{
   width:10%;
